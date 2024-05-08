@@ -1,15 +1,26 @@
-const express = require('express');
-const userControllers = require('../controllers/userControllers');
-const checkAuthentication = require('../middleware/checkAuthentication');
+const express = require("express");
+const userControllers = require("../controllers/userControllers");
+const checkAuthentication = require("../middleware/checkAuthentication");
 
 const userRouter = express.Router();
 
-userRouter.post('/', userControllers.createUser);
+userRouter.post("/", userControllers.createUser); // Register
+userRouter.post("/:id/posts", userControllers.createPost); // Create a post
+userRouter.post("/:id/follow", userControllers.followRepresentative); // Follow a representative
 
-// These actions require users to be logged in (authentication)
-// Express lets us pass a piece of middleware to run for a specific endpoint
-userRouter.get('/', checkAuthentication, userControllers.listUsers);
-userRouter.get('/:id', checkAuthentication, userControllers.showUser);
-userRouter.patch('/:id', checkAuthentication, userControllers.updateUser);
+userRouter.patch("/:id", checkAuthentication, userControllers.updateUser); // Update user information
+userRouter.patch("/:id/representative", userControllers.updateToRepresentative); // Update user to representative
 
+userRouter.get("/", checkAuthentication, userControllers.listUsers); // Show all users
+userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show one user
+userRouter.get("/:id/posts", userControllers.getPostsByRepresentative); // Get posts by a representative
+userRouter.get("/:id/followers", userControllers.getFollowers); // Get followers
+userRouter.get("/:id/following", userControllers.getFollowing); // Get following
+
+userRouter.delete(
+  "/:id/follow/:userId",
+  userControllers.unfollowRepresentative
+); // Unfollow a representative
+userRouter.delete("/:id/posts/:postId", userControllers.deletePost); // Delete a post
+userRouter.delete("/:id", checkAuthentication, userControllers.deleteUser);
 module.exports = userRouter;
