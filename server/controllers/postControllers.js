@@ -1,3 +1,3 @@
-exports.createPost = (req,res) => {
+exports.createPost = async (req, res) => {
 
 }
