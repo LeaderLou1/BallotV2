@@ -15,6 +15,8 @@ exports.createUser = async (req, res) => {
     is_rep,
   } = req.body;
 
+  exports.cr;
+
   // TODO: check if username is taken, and if it is what should you return?
   const user = await User.create(
     username,
@@ -48,15 +50,21 @@ exports.showUser = async (req, res) => {
 };
 
 exports.updateUser = async (req, res) => {
-  const { username } = req.body;
-  const { is_rep } = req.body;
-  const { first_name } = req.body;
-  const { last_name } = req.body;
-  const { picture_url } = req.body;
-  const { zipcode } = req.body;
-  const { state } = req.body;
-  const { bio } = req.body;
-  const { location } = req.body;
+  const {
+    username,
+    is_rep,
+    first_name,
+    last_name,
+    picture_url,
+    zipcode,
+    state,
+    bio,
+    location,
+  } = req.body;
+
+  // PATCH /api/users/5
+  // PATCH /api/users/:id
+  // this is the id of the user we want to change
   const { id } = req.params;
 
   // Not only do users need to be logged in to update a user, they
