@@ -19,7 +19,7 @@ export default function SiteHeadingAndNav() {
             </>
             : <>
               <li><NavLink to='/login'>Login</NavLink></li>
-              <li><NavLink to='/sign-up'>Sign Up</NavLink></li>
+              <li><NavLink to='/choose'>Sign Up</NavLink></li>
             </>
         }
       </ul>
