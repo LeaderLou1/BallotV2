@@ -1,5 +1,4 @@
-const knex = require("../knex");
-const Post = require("../db/models/Post");
+const Post = require("../db/models/Posts");
 
 exports.createPost = async (req, res) => {
   try {
