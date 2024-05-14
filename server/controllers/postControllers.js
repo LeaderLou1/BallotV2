@@ -1,23 +1,49 @@
-const knex = require("../knex");
-const Post = require("../db/models/Post");
+const Post = require('../models/Post');
 
-exports.createPost = async (req, res) => {
-    try {
-        const { contents, userId } = req.body;
-
-        if (!contents || !userId) {
-            return res.status(400).json({ error: "Missing required fields" });
+const postsControllers = {
+    create: async (req, res) => {
+        const { user_id, content } = req.body;
+        try {
+            const post = await Post.create(user_id, content);
+            res.json(post);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
         }
+    },
 
-        const [postId] = await knex("posts").insert({ contents, user_id: userId });
+    findByUserId: async (req, res) => {
+        const { user_id } = req.params;
+        try {
+            const posts = await Post.findByUserId(user_id);
+            res.json(posts);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
 
-        const newPost = await Post.query().findById(postId);
+    delete: async (req, res) => {
+        const { id } = req.params;
+        try {
+            await Post.delete(id);
+            res.sendStatus(204);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
+    },
 
-        res
-            .status(201)
-            .json({ message: "Post created successfully", post: newPost });
-    } catch (error) {
-        console.error("Error creating post:", error);
-        res.status(500).json({ error: "Failed to create post" });
+    deleteAllPostsForUser: async (req, res) => {
+        const { user_id } = req.params;
+        try {
+            await Post.deleteAllPostsForUser(user_id);
+            res.sendStatus(204);
+        } catch (error) {
+            console.error(error);
+            res.status(500).json({ error: 'Internal Server Error' });
+        }
     }
 };
+
+module.exports = postsControllers;
