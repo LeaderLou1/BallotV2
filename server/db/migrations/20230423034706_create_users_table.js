@@ -7,7 +7,14 @@ exports.up = (knex) => {
     table.increments();
     table.string("username").notNullable().unique();
     table.string("password_hash").notNullable();
-    table.boolean("is_rep").notNullable().defaultTo(false);
+    table.boolean("is_rep").notNullable();
+    table.string("first_name").notNullable();
+    table.string("last_name").notNullable();
+    table.string("zipcode").notNullable();
+    table.string("bio").notNullable();
+    table.string("location").notNullable();
+    table.string("state").notNullable();
+    table.string("picture_url").notNullable();
     table.timestamps(true, true);
   });
 };
