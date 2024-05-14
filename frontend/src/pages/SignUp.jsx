@@ -121,7 +121,6 @@ export default function SignUpPage() {
         <input autoComplete="off" type="password" id="password-confirm" name="passwordConfirm" />
       */}
     <br />
-    
       <button>Sign Up Now!</button>
     </form>
      <br />

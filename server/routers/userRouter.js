@@ -1,15 +1,98 @@
-const express = require('express');
-const userControllers = require('../controllers/userControllers');
-const checkAuthentication = require('../middleware/checkAuthentication');
+const express = require("express");
+const userControllers = require("../controllers/userControllers");
+const postControllers = require("../controllers/postControllers");
+const checkAuthentication = require("../middleware/checkAuthentication");
+const postAuthorization = require("../middleware/postAuthorization");
 
 const userRouter = express.Router();
 
-userRouter.post('/', userControllers.createUser);
+// user related endpoints
+userRouter.post("/", checkAuthentication, userControllers.createUser); // Register
+userRouter.patch("/:id", checkAuthentication, userControllers.updateUser); // Update user information
+userRouter.get("/", checkAuthentication, userControllers.listUsers); // Show all users
+userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show one user
+// userRouter.patch(
+//   "/:id/representative",
+//   checkAuthentication,
+//   userControllers.updateToRepresentative
+// ); // Update user to representative
 
-// These actions require users to be logged in (authentication)
-// Express lets us pass a piece of middleware to run for a specific endpoint
-userRouter.get('/', checkAuthentication, userControllers.listUsers);
-userRouter.get('/:id', checkAuthentication, userControllers.showUser);
-userRouter.patch('/:id', checkAuthentication, userControllers.updateUser);
+// userRouter.delete("/:id", checkAuthentication, userControllers.deleteUser);
 
+// user post related endpoints
+userRouter.post(
+  "/:id/posts",
+  checkAuthentication,
+  postAuthorization,
+  postControllers.createPost
+);
+// Create a post
+
+userRouter.get(
+  "/:id/posts",
+  checkAuthentication,
+  userControllers.getPostsByRepresentative
+);
+// Get posts by a representative
+
+userRouter.delete(
+  "/:id/posts/:postId",
+  checkAuthentication,
+  postAuthorization,
+  userControllers.deletePost
+);
+// Delete a post
+
+// user follow related endpoints
+
+// userRouter.post(
+//   "/:id/follow",
+//   checkAuthentication,
+//   userControllers.followRepresentative
+// ); // Follow a representative
+
+// userRouter.get(
+//   "/:id/followers",
+//   checkAuthentication,
+//   userControllers.getFollowers
+// ); // Get followers
+// userRouter.get(
+//   "/:id/following",
+//   checkAuthentication,
+//   userControllers.getFollowing
+// ); // Get following
+
+// userRouter.delete(
+//   "/:id/follow/:userId",
+//   userControllers.unfollowRepresentative
+// ); // Unfollow a representative
+
+userRouter.get("/", checkAuthentication, userControllers.listUsers); // Show all users
+userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show one user
+userRouter.get(
+  "/:id/posts",
+  checkAuthentication,
+  userControllers.getPostsByRepresentative
+); // Get posts by a representative
+userRouter.get(
+  "/:id/followers",
+  checkAuthentication,
+  userControllers.getFollowers
+); // Get followers
+userRouter.get(
+  "/:id/following",
+  checkAuthentication,
+  userControllers.getFollowing
+); // Get following
+
+userRouter.delete(
+  "/:id/follow/:userId",
+  userControllers.unfollowRepresentative
+); // Unfollow a representative
+userRouter.delete(
+  "/:id/posts/:postId",
+  checkAuthentication,
+  userControllers.deletePost
+); // Delete a post
+userRouter.delete("/:id", checkAuthentication, userControllers.deleteUser);
 module.exports = userRouter;
