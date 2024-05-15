@@ -42,7 +42,7 @@ The `package.json` file in the root directory only has scripts for quickly build
 ### Setup Steps
 
 - First, make sure that you have a new GitHub Organization for your project.
-- Select <kbd>Use this template</kbd> and select <kbd>Create a new repository</kbd>. Rename the repo and choose your GitHub organization as the owner. 
+- Select <kbd>Use this template</kbd> and select <kbd>Create a new repository</kbd>. Rename the repo and choose your GitHub organization as the owner.
 - Clone your repo.
 - Create a database called `react_auth_example` database (or a name of your choice)
 - In the `server/` folder, copy the `.env.template` and name it `.env`.
@@ -52,6 +52,7 @@ The `package.json` file in the root directory only has scripts for quickly build
 - To start the server with the built static assets, run `npm start`
 
 During development, you can also use the following commands from the root of the project
+
 - Open a new terminal and run `npm run dev:frontend` to run the frontend development server
 - Run `npm run build:frontend` to update the static assets in the frontend.
 
@@ -63,7 +64,7 @@ The back-end is responsible for receiving and responding to client requests. Req
 
 ### Back-end API
 
-The provided back-end exposes the following API endpoints to access user data in `routers/userRoutes.js` 
+The provided back-end exposes the following API endpoints to access user data in `routers/userRoutes.js`
 
 | Method | Path           | Description                                  |
 | ------ | -------------- | -------------------------------------------- |
@@ -88,12 +89,12 @@ In `server/db/`, you can see the migration file for the `users` table:
 
 ```js
 exports.up = (knex) => {
-  return knex.schema.createTable('users', (table) => {
+  return knex.schema.createTable("users", (table) => {
     table.increments();
-    table.string('username').notNullable().unique();
-    table.string('password_hash').notNullable();
+    table.string("username").notNullable().unique();
+    table.string("password_hash").notNullable();
     table.timestamps(true, true); // adds the auto-generated created-at and updated-at columns
-  })
+  });
 };
 ```
 
@@ -112,14 +113,15 @@ Notice how the passwords have been hashed!
 ### User Model
 
 The `User` model (defined in `server/db/models/User.js`) provides static methods for performing CRUD operations with the `users` table in the database:
-* `User.list()`
-* `User.find(id)`
-* `User.findByUsername(username)`
-* `User.create(username, password)`
-* `User.update(id, username)`
-* `User.deleteAll()`
 
-Note that there is both a `User.create()` method AND a `constructor()`. There is also an *instance* method `isValidPassword()`.
+- `User.list()`
+- `User.find(id)`
+- `User.findByUsername(username)`
+- `User.create(username, password)`
+- `User.update(id, username)`
+- `User.deleteAll()`
+
+Note that there is both a `User.create()` method AND a `constructor()`. There is also an _instance_ method `isValidPassword()`.
 
 Let's look at how these three functions are related.
 
@@ -150,11 +152,12 @@ Why do this?
 
 Whenever we receive data from the database about a user, it will include the hashed password. We need to send that user's data to the frontend, but we don't want to expose the password, even if it is hashed.
 
-Using the `constructor`  is a clever trick of sorts that takes advantage of the **private instance property** feature of classes. Here is how:
-* By wrapping the `user` data from the database in a `new User()` instance, we can make the a private `#passwordHash` property
-* The `#passwordHash` property can't be accessed except by the instance itself.
-* If our controller needs to verify the password for a given `User` instance, it can do so using the instance method `isValidPassword` which DOES have access to the private `#passwordHash` property. 
-* `isValidPassword` uses the `authUtils.isValidPassword` helper function (which uses `bcrypt.compare()`) to verify provided password against the stored `#passwordHash`
+Using the `constructor` is a clever trick of sorts that takes advantage of the **private instance property** feature of classes. Here is how:
+
+- By wrapping the `user` data from the database in a `new User()` instance, we can make the a private `#passwordHash` property
+- The `#passwordHash` property can't be accessed except by the instance itself.
+- If our controller needs to verify the password for a given `User` instance, it can do so using the instance method `isValidPassword` which DOES have access to the private `#passwordHash` property.
+- `isValidPassword` uses the `authUtils.isValidPassword` helper function (which uses `bcrypt.compare()`) to verify provided password against the stored `#passwordHash`
 
 ```js
 class User {
@@ -167,9 +170,8 @@ class User {
   }
 
   // this instance method can access the private passwordHash
-  isValidPassword = async (password) => (
-    authUtils.isValidPassword(password, this.#passwordHash)
-  );
+  isValidPassword = async (password) =>
+    authUtils.isValidPassword(password, this.#passwordHash);
 
   //... other methods...
 }
@@ -179,10 +181,9 @@ class User {
 
 So, how are these methods used? Let's look at the login flow. Below is the `loginUser` controller which is executed for the endpoint `POST /api/login`:
 
-
 ```js
 exports.loginUser = async (req, res) => {
-  const { username, password } = req.body
+  const { username, password } = req.body;
 
   // Get a User instance (we can see the username and id but can't see the password)
   const user = await User.findByUsername(username);
@@ -197,10 +198,10 @@ exports.loginUser = async (req, res) => {
 };
 ```
 
-* First, the `User.findByUsername` function searches for a user in the database with the provided `username`
-* The value returned will be a `User` instance (or `null` if not found)
-* Next, the provided `password` needs to be verified to see if it matches the password in the database. We can't look at `user.passwordHash` since it is private, but we CAN use the `user.isValidPassword` to verify for us.
-* If both the user is found and the password matches, we send the user data to the frontend.
+- First, the `User.findByUsername` function searches for a user in the database with the provided `username`
+- The value returned will be a `User` instance (or `null` if not found)
+- Next, the provided `password` needs to be verified to see if it matches the password in the database. We can't look at `user.passwordHash` since it is private, but we CAN use the `user.isValidPassword` to verify for us.
+- If both the user is found and the password matches, we send the user data to the frontend.
 
 ### Middleware
 
@@ -210,10 +211,10 @@ In `server/index.js`, various pieces of middleware are used. These pieces of mid
 app.use(handleCookieSessions); // adds a session property to each request representing the cookie
 app.use(logRoutes); // print information about each incoming request
 app.use(express.json()); // parse incoming request bodies as JSON
-app.use(express.static(path.join(__dirname, '../frontend/dist'))); // Serve static assets from the dist folder of the frontend
+app.use(express.static(path.join(__dirname, "../frontend/dist"))); // Serve static assets from the dist folder of the frontend
 
-app.use('/api', authRouter); // all requests beginning with /api will be handled by authRouter first
-app.use('/api/users', userRouter); // all requests beginning with /api/users will be handled by userRouter
+app.use("/api", authRouter); // all requests beginning with /api will be handled by authRouter first
+app.use("/api/users", userRouter); // all requests beginning with /api/users will be handled by userRouter
 ```
 
 - Here, we subdivide the routing between two "sub routers". `app.use` let's us indicate the base URL that each router handles.
@@ -221,6 +222,7 @@ app.use('/api/users', userRouter); // all requests beginning with /api/users wil
 ## Authentication & Authorization
 
 - **authenticated** means "We have confirmed this person is a real user and is allowed to be here"
+
   - For example, only logged in users can see the other users in this app
 
 - **authorized** means "This person is allowed to perform this protected action"
@@ -234,10 +236,10 @@ In the context of computing and the internet, a **cookie** is a small text file 
 
 ![](./documentation/readme-img/cookies.png)
 
-* When a client sends an initial request to the server, it doesn't have a cookie
-* The server sends a response along with a cookie.
-* The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
-* On all future client requests to the server, the cookie will be sent with the request. Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
+- When a client sends an initial request to the server, it doesn't have a cookie
+- The server sends a response along with a cookie.
+- The client can save that cookie and store it on the user's computer (many client-side applications will ask you if you want to save it or not)
+- On all future client requests to the server, the cookie will be sent with the request. Because the cookie is saved locally, even if the user closes the application and re-opens it later, the cookie will be sent along with all requests.
 
 For our purposes, our serve can make a cookie that saves the `id` of the user that is logged in. Whenever the user returns to the site, the cookie can immediately tell us who they are. This can be used to authenticate and to authorize the user.
 
@@ -245,13 +247,13 @@ For our purposes, our serve can make a cookie that saves the `id` of the user th
 
 ### Handle Cookie Sessions
 
-In our application, we are using `handleCookieSessions` middleware with our Express server to create cookies (and encrypt data stored on them) for us. We can access/manipulate those cookies by accessing the `req.session` object when handling incoming requests. 
+In our application, we are using `handleCookieSessions` middleware with our Express server to create cookies (and encrypt data stored on them) for us. We can access/manipulate those cookies by accessing the `req.session` object when handling incoming requests.
 
 To achieve authentication/authorization, we will store the `userId` of the currently logged-in user in the `req.session` object. For example, this is the `loginUser` controller found in `controllers/authControllers`
 
 ```js
 exports.loginUser = async (req, res) => {
-  const { username, password } = req.body // the req.body value is provided by the client
+  const { username, password } = req.body; // the req.body value is provided by the client
 
   const user = await User.findByUsername(username);
   if (!user) return res.sendStatus(404);
@@ -267,6 +269,7 @@ exports.loginUser = async (req, res) => {
 On future requests, if the `req.session.userId` value is missing, then there is not a currently logged in user. If there is a value, then there IS a logged in user.
 
 With this information we can:
+
 1. implement **authentication** (logging a user in / confirming that the user is already logged in).
 2. implement **authorization** (confirm that the person who is logged in can do what they have requested to do, such as edit their profile)
 
@@ -282,7 +285,7 @@ The `checkAuthentication` middleware verifies that the current user is logged in
 // middleware/check-authentication.js
 const checkAuthentication = (req, res, next) => {
   // req.session holds the cookie sent by the client (if it had one)
-  const { userId } = req.session; 
+  const { userId } = req.session;
   if (!userId) return res.sendStatus(401);
   return next();
 };
@@ -290,7 +293,7 @@ const checkAuthentication = (req, res, next) => {
 
 For example, only logged-in users should be able to edit their own user profile.
 
-Here, we specify that the `checkAuthentication` middleware should be used for only this one route. 
+Here, we specify that the `checkAuthentication` middleware should be used for only this one route.
 
 ```js
 // userRouter.js
@@ -329,20 +332,24 @@ export default function UsersPage() {
     getAllUsers().then(setUsers);
   }, []);
 
-  return <>
-    <h1>Users</h1>
-    <ul>
-      {
-        users.map((user) => <li key={user.id}><UserLink user={user} /></li>)
-      }
-    </ul>
-  </>;
+  return (
+    <>
+      <h1>Users</h1>
+      <ul>
+        {users.map((user) => (
+          <li key={user.id}>
+            <UserLink user={user} />
+          </li>
+        ))}
+      </ul>
+    </>
+  );
 }
 ```
 
-* The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
-* The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
-* The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
+- The `useState` hook is created to manage the fetched `users`. On the first render, the `users` array will be empty. When the fetch is complete, `users` will hold the fetched users.
+- The `useEffect` hook initiates an asynchronous fetch of all users, making use of the `getAllUsers` helper function from the `adapters/user-adapter` file. When this fetch is complete, `setUsers` will be invoked to re-render the component with the fetched `users`.
+- The `users` array is mapped to render a `UserLink` for each user. On the first render, nothing will appear. When the fetch is complete and the component re-renders, we will see all users.
 
 ### Adapters
 
@@ -351,7 +358,7 @@ An adapter's sole responsibility is to wrap around the `fetch` logic making it i
 Often, they will be short, like this from the `adapters/user-adapter.js` file:
 
 ```js
-const baseUrl = '/api/users';
+const baseUrl = "/api/users";
 
 export const getAllUsers = async () => {
   const [users, error] = await fetchHandler(baseUrl);
@@ -359,14 +366,15 @@ export const getAllUsers = async () => {
   return users || [];
 };
 ```
-* A `baseUrl` is defined for all adapters in this `user-adapter` file.
-* The `fetchHandler` will return a tuple with either the `users` data or the `error`.
-* Here, we print the `error` if it exists but in more robust applications, errors would be handled more gracefully, or they would potentially be returned.
-* If `users` exists, we'll return it, otherwise return an empty array (thus ignoring the `error`).
+
+- A `baseUrl` is defined for all adapters in this `user-adapter` file.
+- The `fetchHandler` will return a tuple with either the `users` data or the `error`.
+- Here, we print the `error` if it exists but in more robust applications, errors would be handled more gracefully, or they would potentially be returned.
+- If `users` exists, we'll return it, otherwise return an empty array (thus ignoring the `error`).
 
 ### Current User Context
 
-The frontend uses a `CurrentUserContext` to provide the entire application with the currently logged in user and a function to set the currently logged in user. 
+The frontend uses a `CurrentUserContext` to provide the entire application with the currently logged in user and a function to set the currently logged in user.
 
 The first component to use this context is `App` which sets the current user after a successful `GET /api/me` request (the user had a cookie indicating they previously signed in). This is the first thing that happens whenever a user visits the web application.
 
@@ -382,17 +390,18 @@ export default function App() {
 ```
 
 Any page/component that requires authentication or is responsible for altering authentication also uses this Context:
-* `components/SiteHeadingAndNav`
-  * if a user is logged in show a link to view their own profile and a link to see all users, otherwise show the login/sign up buttons in the nav
-* `pages/Login`
-  * if a user is already logged in, it navigates back to the home page.
-  * otherwise, this page can set the current user after a successful `POST /api/login` request
-* `pages/SignUp`
-  * if a user is already logged in, it navigates back to the home page.
-  * otherwise, this page can set the current user after a successful `POST /api/users` request
-* `pages/User`
-  * if the currently logged in user matches the current profile page, the user can edit the profile and log out
-  * if the user logs out, it sets the current logged in user to `null` before navigating back home.
+
+- `components/SiteHeadingAndNav`
+  - if a user is logged in show a link to view their own profile and a link to see all users, otherwise show the login/sign up buttons in the nav
+- `pages/Login`
+  - if a user is already logged in, it navigates back to the home page.
+  - otherwise, this page can set the current user after a successful `POST /api/login` request
+- `pages/SignUp`
+  - if a user is already logged in, it navigates back to the home page.
+  - otherwise, this page can set the current user after a successful `POST /api/users` request
+- `pages/User`
+  - if the currently logged in user matches the current profile page, the user can edit the profile and log out
+  - if the user logs out, it sets the current logged in user to `null` before navigating back home.
 
 ## Deploying
 
@@ -425,20 +434,24 @@ Follow the steps below to create a PostgreSQL database hosted by Render and depl
      - **Instance Type**: Free
    - Select <kbd>Create Web Service</kbd> (Note: The first build will fail because you need to set up environment variables)
 4. Set up environment variables
+
    - From the Web Service you just created, select <kbd>Environment</kbd> on the left side-menu
    - Under Secret Files, select <kbd>Add Secret File</kbd>
+
      - **Filename**: `.env`
      - **Contents**:
+
        - Look at your local `.env` file and copy over the `SESSION_SECRET` variable and value.
        - Add a `PG_CONNECTION_STRING` variable. Its value should be the `Internal Database URL` value from your Postgres page (created in step 2)
        - Add a `NODE_ENV` variable with the value `'production'`
        - The contents should look like this:
 
-        ```env
-        SESSION_SECRET='AS12FD42FKJ42FIE3WOIWEUR1283'
-        PG_CONNECTION_STRING='postgresql://user:password@host/dbname'
-        NODE_ENV='production'
-        ```
+       ```env
+       SESSION_SECRET='AS12FD42FKJ42FIE3WOIWEUR1283'
+       PG_CONNECTION_STRING='postgresql://user:password@host/dbname'
+       NODE_ENV='production'
+       ```
+
    - Click <kbd>Save Changes</kbd>
 
 5. Future changes to your code
@@ -454,4 +467,3 @@ Remember, **DO NOT TRUST THE FRONT-END**. Validate everything on the server. Jus
 ### Be wary of errors
 
 Given time constraints, this project is handling barely any errors. The model is very brittle right now, the server and sql errors should be handled like we've done before. We're also only handling the most basic of flows and errors on the client. Things like handling attempted recreations of users who already exist or even wrong passwords can be handled much more delicately.
-
