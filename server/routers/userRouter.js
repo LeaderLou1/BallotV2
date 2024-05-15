@@ -7,7 +7,7 @@ const postAuthorization = require("../middleware/postAuthorization");
 const userRouter = express.Router();
 
 // user related endpoints
-userRouter.post("/", checkAuthentication, userControllers.createUser); // Register
+userRouter.post("/", userControllers.createUser); // Register
 userRouter.patch("/:id", checkAuthentication, userControllers.updateUser); // Update user information
 userRouter.get("/", checkAuthentication, userControllers.listUsers); // Show all users
 userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show one user
@@ -24,14 +24,14 @@ userRouter.post(
   "/:id/posts",
   checkAuthentication,
   postAuthorization,
-  postControllers.createPost
+  postControllers.create
 );
 // Create a post
 
 userRouter.get(
-  "/:id/posts",
-  checkAuthentication,
-  userControllers.getPostsByRepresentative
+  "/:user_id/posts",
+  // checkAuthentication,
+  postControllers.findByUserId
 );
 // Get posts by a representative
 
@@ -39,7 +39,7 @@ userRouter.delete(
   "/:id/posts/:postId",
   checkAuthentication,
   postAuthorization,
-  userControllers.deletePost
+  postControllers.delete
 );
 // Delete a post
 
@@ -72,27 +72,27 @@ userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show o
 userRouter.get(
   "/:id/posts",
   checkAuthentication,
-  userControllers.getPostsByRepresentative
+  postControllers.findByUserId
 ); // Get posts by a representative
-userRouter.get(
-  "/:id/followers",
-  checkAuthentication,
-  userControllers.getFollowers
-); // Get followers
-userRouter.get(
-  "/:id/following",
-  checkAuthentication,
-  userControllers.getFollowing
-); // Get following
+// userRouter.get(
+//   "/:id/followers",
+//   checkAuthentication,
+//   userControllers.getFollowers
+// ); // Get followers
+// userRouter.get(
+//   "/:id/following",
+//   checkAuthentication,
+//   userControllers.getFollowing
+// ); // Get following
 
-userRouter.delete(
-  "/:id/follow/:userId",
-  userControllers.unfollowRepresentative
-); // Unfollow a representative
+// userRouter.delete(
+//   "/:id/follow/:userId",
+//   userControllers.unfollowRepresentative
+// ); // Unfollow a representative
 userRouter.delete(
   "/:id/posts/:postId",
   checkAuthentication,
-  userControllers.deletePost
+  postControllers.delete
 ); // Delete a post
-userRouter.delete("/:id", checkAuthentication, userControllers.deleteUser);
+// userRouter.delete("/:id", checkAuthentication, userControllers.);
 module.exports = userRouter;
