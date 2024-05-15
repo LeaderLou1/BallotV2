@@ -24,22 +24,18 @@ userRouter.post(
   "/:id/posts",
   checkAuthentication,
   postAuthorization,
-  postControllers.createPost
+  postControllers.create
 );
 // Create a post
 
-userRouter.get(
-  "/:id/posts",
-  checkAuthentication,
-  userControllers.getPostsByRepresentative
-);
+userRouter.get("/:id/posts", checkAuthentication, postControllers.findByUserId);
 // Get posts by a representative
 
 userRouter.delete(
   "/:id/posts/:postId",
   checkAuthentication,
   postAuthorization,
-  userControllers.deletePost
+  postControllers.delete
 );
 // Delete a post
 
