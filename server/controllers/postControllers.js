@@ -1,48 +1,72 @@
 const Post = require("../db/models/Post");
 
 const postsControllers = {
-  create: async (req, res) => {
+  create: (req, res) => {
     const { user_id, content } = req.body;
-    try {
-      const post = await Post.create(user_id, content);
-      res.json(post);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
+    const query = `
+      INSERT INTO posts(user_id, content)
+      VALUES (?, ?)`;
+
+    Post.query(query, [user_id, content], (error, result) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+      } else {
+        res.sendStatus(201);
+      }
+    });
   },
 
-  findByUserId: async (req, res) => {
+  findByUserId: (req, res) => {
     const { user_id } = req.params;
-    try {
-      const posts = await Post.findByUserId(user_id);
-      res.json(posts);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
+    const query = `
+      SELECT * FROM posts
+      WHERE user_id = ?`;
+
+    Post.query(query, [user_id], (error, result) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+      } else {
+        res.json(result.rows);
+      }
+    });
   },
 
-  delete: async (req, res) => {
+  delete: (req, res) => {
     const { id } = req.params;
-    try {
-      await Post.delete(id);
-      res.sendStatus(204);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
+    const query = `
+      DELETE FROM posts
+      WHERE id = ?`;
+
+    Post.query(query, [id], (error, result) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+      } else {
+        if (result.affectedRows > 0) {
+          res.sendStatus(204);
+        } else {
+          res.status(404).json({ error: "Post not found" });
+        }
+      }
+    });
   },
 
-  deleteAllPostsForUser: async (req, res) => {
+  deleteAllPostsForUser: (req, res) => {
     const { user_id } = req.params;
-    try {
-      await Post.deleteAllPostsForUser(user_id);
-      res.sendStatus(204);
-    } catch (error) {
-      console.error(error);
-      res.status(500).json({ error: "Internal Server Error" });
-    }
+    const query = `
+      DELETE FROM posts
+      WHERE user_id = ?`;
+
+    Post.query(query, [user_id], (error, result) => {
+      if (error) {
+        console.error(error);
+        res.status(500).json({ error: "Internal Server Error" });
+      } else {
+        res.sendStatus(204);
+      }
+    });
   },
 };
 
