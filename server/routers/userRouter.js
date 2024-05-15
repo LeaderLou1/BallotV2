@@ -7,10 +7,10 @@ const postAuthorization = require("../middleware/postAuthorization");
 const userRouter = express.Router();
 
 // user related endpoints
-userRouter.post("/", checkAuthentication, userControllers.createUser); // Register
-userRouter.patch("/:id", checkAuthentication, userControllers.updateUser); // Update user information
-userRouter.get("/", checkAuthentication, userControllers.listUsers); // Show all users
-userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show one user
+userRouter.post("/", /*checkAuthentication,*/ userControllers.createUser); // Register
+userRouter.patch("/:id", /*checkAuthentication,*/ userControllers.updateUser); // Update user information
+userRouter.get("/", /*checkAuthentication,*/ userControllers.listUsers); // Show all users
+userRouter.get("/:id", /*checkAuthentication,*/ userControllers.showUser); // Show one user
 // userRouter.patch(
 //   "/:id/representative",
 //   checkAuthentication,
@@ -22,18 +22,21 @@ userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show o
 // user post related endpoints
 userRouter.post(
   "/:id/posts",
-  checkAuthentication,
+  /*checkAuthentication,*/
   postAuthorization,
   postControllers.create
 );
 // Create a post
 
-userRouter.get("/:id/posts", checkAuthentication, postControllers.findByUserId);
+userRouter.get(
+  "/:id/posts",
+  /*checkAuthentication,*/ postControllers.findByUserId
+);
 // Get posts by a representative
 
 userRouter.delete(
   "/:id/posts/:postId",
-  checkAuthentication,
+  /*checkAuthentication,*/
   postAuthorization,
   postControllers.delete
 );
