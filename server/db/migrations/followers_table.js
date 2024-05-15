@@ -12,7 +12,13 @@ exports.up = function (knex) {
       .references("id")
       .inTable("users")
       .onDelete("CASCADE");
-    table.string("username").notNullable();
+    table
+      .integer("followed_user_id")
+      .notNullable()
+      .references("id")
+      .inTable("users")
+      .onDelete("CASCADE");
+    table.string("username");
 
     table.timestamps(true, true);
   });

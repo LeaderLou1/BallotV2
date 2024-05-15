@@ -42,6 +42,15 @@ class Follower {
     const followers = await knex.raw(query, [user_id]);
     return followers.rows;
   }
+
+  static async create({ user_id, followed_user_id, username }) {
+    const query = `
+      INSERT INTO followers(user_id, followed_user_id, username)
+      VALUES (?, ?, ?)`;
+
+    const result = await knex.raw(query, [user_id, followed_user_id, username]);
+    return result.rowCount > 0;
+  }
 }
 
 module.exports = Follower;
