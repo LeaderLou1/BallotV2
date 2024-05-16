@@ -8,20 +8,22 @@ class Follower {
     this.username = username;
   }
 
-  static async followUser(user_id, followed_user_id) {
+  static async followUser(user_id, followed_user_id, username) {
     const query = `
-      INSERT INTO followers(user_id, followed_user_id)
+      INSERT INTO followers(user_id, followed_user_id, username)
       SELECT ?, ?
       WHERE NOT EXISTS (
         SELECT 1 FROM followers
-        WHERE user_id = ? AND followed_user_id = ?
+        WHERE user_id = ? AND followed_user_id = ? AND username = ?
       )`;
 
     const result = await knex.raw(query, [
       user_id,
       followed_user_id,
+      username,
       user_id,
       followed_user_id,
+      username,
     ]);
 
     return result.rowCount > 0;

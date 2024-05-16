@@ -4,10 +4,13 @@ const User = require("../models/User");
  * @returns { Promise<void> }
  */
 exports.seed = async (knex) => {
-  // Before you have models you can always just do `await knex('table_name').del`
+  await knex("followers").del();
+  await knex("posts").del();
   await knex("users").del();
 
   await knex.raw("ALTER SEQUENCE users_id_seq RESTART WITH 1");
+  await knex.raw("ALTER SEQUENCE posts_id_seq RESTART WITH 1");
+  await knex.raw("ALTER SEQUENCE followers_id_seq RESTART WITH 1");
 
   await User.create(
     "cool_cat",
@@ -45,4 +48,16 @@ exports.seed = async (knex) => {
     "464 East 56th St",
     "Wow I'm outside"
   );
+
+  await knex("posts").insert([
+    { user_id: 1, content: "hello" },
+    { user_id: 3, content: "bye" },
+    { user_id: 4, content: "hellobye" },
+  ]);
+
+  await knex("followers").insert([
+    { user_id: 1, followed_user_id: 2 },
+    { user_id: 2, followed_user_id: 1 },
+    { user_id: 3, followed_user_id: 1 },
+  ]);
 };
