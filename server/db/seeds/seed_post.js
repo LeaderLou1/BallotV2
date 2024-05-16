@@ -7,7 +7,7 @@ exports.seed = async function (knex) {
   await knex("posts").del();
   await knex("posts").insert([
     { user_id: 1, content: "hello" },
-    { user_id: 3, content: "bye" },
+    { user_id: 1, content: "bye" },
     { user_id: 4, content: "hellobye" },
   ]);
 };
