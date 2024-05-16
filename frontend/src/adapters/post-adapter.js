@@ -8,7 +8,3 @@ export const createPost = async ({ user_id, content }) => (
 
 export const getPostByUserId = async (id) => fetchHandler(`${baseUrl}/${user_id}/posts`);
 
-export const updatePostContent = async ({ id, content }) => (
-    fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, content }))
-
-);
