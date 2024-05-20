@@ -7,4 +7,3 @@ export const createPost = async ({ user_id, content }) => (
 );
 
 export const getPostByUserId = async (id) => fetchHandler(`${baseUrl}/${user_id}/posts`);
-

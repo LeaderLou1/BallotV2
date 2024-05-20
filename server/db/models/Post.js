@@ -13,7 +13,7 @@ class Post {
       content,
     ]);
     const post = rows[0];
-    return new Post(post)
+    return post
   }
 
   static async findByUserId(user_id) {
@@ -29,7 +29,6 @@ class Post {
     const result = await knex.raw(query, [id])
     return result
   }
-
 }
 
 module.exports = Post;
