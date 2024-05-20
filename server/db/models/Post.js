@@ -24,9 +24,9 @@ class Post {
     return result.rows;
   }
 
-  static async delete(id) {
+  static async delete(post_id) {
     const query = `DELETE * FROM posts WHERE id = ?`;
-    const result = await knex.raw(query, [id])
+    const result = await knex.raw(query, [post_id])
     return result
   }
 }

@@ -1,12 +1,6 @@
 const knex = require("../knex");
 
 class Follower {
-  constructor({ id, user_id, followed_user_id, username }) {
-    this.id = id;
-    this.user_id = user_id;
-    this.followed_user_id = followed_user_id;
-    this.username = username;
-  }
 
   static async followUser(user_id, followed_user_id, username) {
     const query = `

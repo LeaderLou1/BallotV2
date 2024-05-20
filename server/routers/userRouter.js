@@ -1,9 +1,9 @@
 const express = require("express");
+const followerControllers = require("../controllers/followerControllers")
 const userControllers = require("../controllers/userControllers");
 const postControllers = require("../controllers/postControllers");
 const checkAuthentication = require("../middleware/checkAuthentication");
 const postAuthorization = require("../middleware/postAuthorization");
-
 const userRouter = express.Router();
 
 // user related endpoints
@@ -21,21 +21,22 @@ userRouter.get("/:id", /*checkAuthentication,*/ userControllers.showUser); // Sh
 
 // user post related endpoints
 userRouter.post(
-  "/:id/posts",
+  "/:user_id/posts",
   /*checkAuthentication,*/
   postAuthorization,
   postControllers.create
 );
 // Create a post
 
+// GET /api/users/1/posts- get posts made by user 1.
 userRouter.get(
-  "/:id/posts",
+  "/:user_id/posts",
   /*checkAuthentication,*/ postControllers.findByUserId
 );
 // Get posts by a representative
 
 userRouter.delete(
-  "/:id/posts/:postId",
+  "/:user_id/posts/:post_id",
   /*checkAuthentication,*/
   postAuthorization,
   postControllers.delete
@@ -44,11 +45,11 @@ userRouter.delete(
 
 // user follow related endpoints
 
-// userRouter.post(
-//   "/:id/follow",
-//   checkAuthentication,
-//   userControllers.followRepresentative
-// ); // Follow a representative
+userRouter.post(
+  "/:follower_user_id/follow",
+  // checkAuthentication,
+  followerControllers.followRepresentative
+); // Follow a representative
 
 // userRouter.get(
 //   "/:id/followers",
