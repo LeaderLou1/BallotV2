@@ -1,7 +1,24 @@
 import { Link } from 'react-router-dom'
 import { Flex, Text, Box, Grid, Container, Button } from '@radix-ui/themes';
 import Img from '../Photo/PoliticsImg1.jpeg'
+import { useContext } from 'react'
+import UserContext from '../contexts/current-user-context'
+
 const ChoicePage = () => {
+    const { isRep, setIsRep} = useContext(UserContext)
+
+
+    const helper2 = () => {
+        setIsRep(false)
+        console.log(isRep)
+    }
+
+    const helper1 = () => {
+        setIsRep(true)
+        console.log(isRep)
+    }
+    
+   
     return(
         <>
         <Flex>
@@ -21,9 +38,9 @@ const ChoicePage = () => {
             <Text size="9" style={{margin: "8rem", marginTop:"20rem", fontWeight: 'bold'}}>Who Are You?</Text>
         </Flex>
         <Flex justify="center">
-        <Link to="/sign-up" style={{textDecoration: "none"}}><Button size="4" variant="surface" style={{marginRight: "4rem"}}>Representative</Button></Link> 
+        <Link to="/sign-up" style={{textDecoration: "none"}}><Button size="4" variant="surface" onClick={helper1} style={{marginRight: "4rem"}}>Representative</Button></Link> 
 
-        <Link to="/sign-up" style={{textDecoration: "none"}}><Button size="4" variant="surface" style={{marginLeft: "2rem"}}>Citizen</Button></Link>
+        <Link to="/sign-up" style={{textDecoration: "none"}} ><Button size="4" variant="surface" onClick={helper2} style={{marginLeft: "2rem"}}>Citizen</Button></Link>
         </Flex>
         </Container>
 

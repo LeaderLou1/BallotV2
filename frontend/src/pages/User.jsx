@@ -33,10 +33,10 @@ export default function UserPage() {
   if (errorText) return <p>{errorText}</p>;
 
   // What parts of state would change if we altered our currentUser context?
-  // Ideally, this would update if we mutated it
+  // Ideally, this would update if we mutated 
   // But we also have to consider that we may NOT be on the current users page
   const profileUsername = isCurrentUserProfile ? currentUser.username : userProfile.username;
-
+  console.log(currentUser)
   return <>
     <h1>{profileUsername}</h1>
     {!!isCurrentUserProfile && <button onClick={handleLogout}>Log Out</button>}

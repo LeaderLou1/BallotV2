@@ -66,15 +66,12 @@ class User {
     is_rep,
     first_name,
     last_name,
-    picture_url,
     zipcode,
-    state,
-    location,
-    bio
+    state
   ) {
     // modify to determine user is represenentstive
     // hash the plain-text password using bcrypt before storing it in the database
-    const passwordHash = await authUtils.hashPassword(password);
+    const password_hash = await authUtils.hashPassword(password);
 
     const query = `INSERT INTO users (
       username, 
@@ -82,23 +79,17 @@ class User {
       is_rep,
       first_name,
       last_name,
-      picture_url,
       zipcode,
-      state,
-      location,
-      bio)
-      VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING *`;
+      state)
+      VALUES (?,?,?,?,?,?,?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
-      passwordHash,
+      password_hash,
       is_rep,
       first_name,
       last_name,
-      picture_url,
       zipcode,
-      state,
-      location,
-      bio,
+      state
     ]);
     const user = rows[0];
     return new User(user);
