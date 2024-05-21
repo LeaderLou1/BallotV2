@@ -23,7 +23,7 @@ userRouter.get("/:id", /*checkAuthentication,*/ userControllers.showUser); // Sh
 userRouter.post(
   "/:user_id/posts",
   /*checkAuthentication,*/
-  postAuthorization,
+  // postAuthorization,
   postControllers.create
 );
 // Create a post
