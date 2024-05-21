@@ -56,8 +56,8 @@ exports.seed = async (knex) => {
   ]);
 
   await knex("followers").insert([
-    { user_id: 1, followed_user_id: 2 },
-    { user_id: 2, followed_user_id: 1 },
-    { user_id: 3, followed_user_id: 1 },
+    { follower_user_id: 1, followed_user_id: 2 },
+    { follower_user_id: 2, followed_user_id: 1 },
+    { follower_user_id: 3, followed_user_id: 1 },
   ]);
 };

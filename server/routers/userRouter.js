@@ -46,25 +46,26 @@ userRouter.delete(
 // user follow related endpoints
 
 userRouter.post(
-  "/:follower_user_id/follow",
+  "/:follower_user_id/followed_user_id",
   // checkAuthentication,
   followerControllers.followRepresentative
 ); // Follow a representative
 
-// userRouter.get(
-//   "/:id/followers",
-//   checkAuthentication,
-//   userControllers.getFollowers
-// ); // Get followers
-// userRouter.get(
-//   "/:id/following",
-//   checkAuthentication,
-//   userControllers.getFollowing
-// ); // Get following
+userRouter.get(
+  "/:follower_user_id/followers",
+  checkAuthentication,
+  followerControllers.getFollowers
+); // Get followers people who follow you
 
-// userRouter.delete(
-//   "/:id/follow/:userId",
-//   userControllers.unfollowRepresentative
-// ); // Unfollow a representative
+userRouter.get(
+  "/:followed_user_id/followed",
+  checkAuthentication,
+  followerControllers.getFollowed
+); // Get followed people who you follow
+
+userRouter.delete(
+  "/:followed_user_id/unfollowUser",
+  followerControllers.unfollowUser
+); // Unfollow a representative
 
 module.exports = userRouter;

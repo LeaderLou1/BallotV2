@@ -39,6 +39,13 @@ class Follower {
     return followers.rows;
   }
 
+  static async getFollowed(user_id) {
+    const query = `SELECT * FROM followed WHERE user_id = ?`;
+
+    const followed = await knex.raw(query, [user_id]);
+    return followed.rows;
+  }
+
   static async create({ user_id, followed_user_id, username }) {
     const query = `
       INSERT INTO followers(user_id, followed_user_id, username)
