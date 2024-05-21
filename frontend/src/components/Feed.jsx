@@ -6,32 +6,31 @@ import Posts from "./RepPosts";
 const Feed = () => {
   return <Posts></Posts>;
 };
-  const [feed, setFeed] = useState([]);
+const [feed, setFeed] = useState([]);
 
-  useEffect(() => {
-    const fetchFeed = async () => {
-      const [fetchedFeed, feedError] = await getAllPosts();
-      setFeed(fetchedFeed);
-    };
+useEffect(() => {
+  const fetchFeed = async () => {
+    const [fetchedFeed, feedError] = await getAllPosts();
+    setFeed(fetchedFeed);
+  };
 
-    fetchFeed();
-  }, []);
+  fetchFeed();
+}, []);
 
-  console.log(feed);
+console.log(feed);
 
-  return (
-    <div>
-      {feed.map((post) => (
-        <Posts post={post} />
-      ))}
-      {/* {feed.map((post) => (
+return (
+  <div>
+    {feed.map((post) => (
+      <Posts post={post} />
+    ))}
+    {/* {feed.map((post) => (
         <div key={post.id}>
           <h3>{post.title}</h3>
           <p>{post.content}</p>
         </div>
       ))} */}
-    </div>
-  );
-};
+  </div>
+);
 
 export default Feed;
