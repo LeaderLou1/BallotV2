@@ -10,11 +10,8 @@ export const createUser = async ({
   is_rep,
   first_name,
   last_name,
-  picture_url,
   zipcode,
-  state,
-  location,
-  bio,
+  state
 }) =>
   fetchHandler(
     baseUrl,
@@ -24,11 +21,8 @@ export const createUser = async ({
       is_rep,
       first_name,
       last_name,
-      picture_url,
       zipcode,
-      state,
-      location,
-      bio,
+      state
     })
   );
 

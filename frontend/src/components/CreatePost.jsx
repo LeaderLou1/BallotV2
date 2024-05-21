@@ -1,4 +1,5 @@
 import { Flex, Box, Card, Text, Button, TextArea } from "@radix-ui/themes";
+import { createPost } from "../adapters/post-adapter";
 
 const CreatePost = () => {
   return (
