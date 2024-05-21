@@ -18,8 +18,7 @@ exports.followRepresentative = async (req, res) => {
 };
 
 exports.unfollowUser = async (req, res) => {
-  const { follower_user_id, followed_user_id } = req.body;
-
+  const { follower_user_id, followed_user_id } = req.params;
   const result = await Follower.unfollowUser(follower_user_id, followed_user_id);
   if (result) {
     const followedUser = await User.findbyId(followed_user_id);

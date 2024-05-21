@@ -66,6 +66,6 @@ userRouter.get(
 userRouter.delete(
   "/:followed_user_id/unfollowUser",
   followerControllers.unfollowUser
-); // Unfollow a representative
+); // Unfollow a representative 
 
 module.exports = userRouter;
