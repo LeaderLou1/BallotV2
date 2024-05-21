@@ -1,12 +1,21 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
+import { NavLink, useNavigate} from "react-router-dom";
+import { logUserOut } from "../adapters/auth-adapter";
 import { Flex, Box, Button, Separator } from '@radix-ui/themes';
 import homeIcon from '../Photo/homeIcon.png';
 import profileIcon from '../Photo/placeholder.png';
 import aboutIcon from '../Photo/aboutIcon.png';
 import logo from '../Photo/Logo.png'
+import CurrentUserContext from '../contexts/current-user-context';
 
 const NavBar = () => {
     const [hoveredIcon, setHoveredIcon] = useState(null);
+    const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+
+    const handleLogout = async () => {
+        logUserOut();
+        setCurrentUser(null);
+      };
 
     return (
         <Box minHeight="100vh" width='300px' style={{ background: 'white', border: ".2px solid black", borderRightWidth:".2px"}}> 
@@ -22,6 +31,7 @@ const NavBar = () => {
                 <br />
 
                 <Flex>
+                <NavLink to='/'>
                     <Button
                         size="4"
                         color='grey'
@@ -37,13 +47,14 @@ const NavBar = () => {
                         />
                         Home
                     </Button>
+                    </NavLink>
                 </Flex>
 
                 <Flex justify='center'>
                     <Separator color="black" orientation="horizontal" size="3.5" />
                 </Flex>
 
-                <Flex>
+                <Flex> <NavLink to={`/users/${currentUser.id}`} end={true}>
                     <Button
                         size="3"
                         variant='ghost'
@@ -58,6 +69,7 @@ const NavBar = () => {
                         />
                         Profile
                     </Button>
+                    </NavLink>
                 </Flex>
 
                 <Flex justify='center'>
@@ -83,9 +95,11 @@ const NavBar = () => {
 
                 <div style={{ marginTop: "335px" }}>
                     <Flex>
-                        <Button color="gray" variant="solid" highContrast style={{ fontSize: '30px', width: '300px', height: '60px' }}>
+                    <NavLink to={'/login'}>
+                        <Button color="gray" variant="solid" onClick={handleLogout} highContrast style={{ fontSize: '30px', width: '300px', height: '60px' }}>
                             Log Out
                         </Button>
+                        </NavLink>
                     </Flex>
                 </div>
             </>

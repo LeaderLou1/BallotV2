@@ -7,12 +7,9 @@ exports.createUser = async (req, res) => {
     password,
     first_name,
     last_name,
-    picture_url,
     zipcode,
     state,
-    location,
-    bio,
-    is_rep,
+    is_rep
   } = req.body;
 
   // TODO: check if username is taken, and if it is what should you return?
@@ -22,11 +19,8 @@ exports.createUser = async (req, res) => {
     is_rep,
     first_name,
     last_name,
-    picture_url,
     zipcode,
-    state,
-    location,
-    bio
+    state
   );
   req.session.userId = user.id;
 

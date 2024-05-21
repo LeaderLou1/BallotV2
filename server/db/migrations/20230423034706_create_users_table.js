@@ -11,10 +11,10 @@ exports.up = (knex) => {
     table.string("first_name").notNullable();
     table.string("last_name").notNullable();
     table.string("zipcode").notNullable();
-    table.string("bio").notNullable();
-    table.string("location").notNullable();
+    table.string("bio");
+    table.string("location");
     table.string("state").notNullable();
-    table.string("picture_url").notNullable();
+    table.string("picture_url");
     table.timestamps(true, true);
   });
 };
