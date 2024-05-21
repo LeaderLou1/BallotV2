@@ -29,7 +29,7 @@ const RepPosts = ({ post }) => {
               <Box span={1} style={{ margin: "10px", width: "100px" }}>
                 {" "}
                 {/* Set span to 1 for the first column */}
-                <Avatar size="6" src={placeHolder} fallback="A"></Avatar>
+                <Avatar size="6" src={post.picture_url} fallback="A"></Avatar>
                 <Text size="5" weight="bold">
                   {post.username}
                 </Text>
