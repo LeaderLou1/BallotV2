@@ -1,6 +1,6 @@
+import Posts from "./RepPosts";
 import React, { useEffect, useState } from "react";
 import { getAllPosts } from "../adapters/post-adapter";
-import Posts from "./RepPosts";
 
 const Feed = () => {
   const [feed, setFeed] = useState([]);
