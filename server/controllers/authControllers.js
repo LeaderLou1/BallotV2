@@ -6,7 +6,7 @@ const User = require('../db/models/User');
 // and sends back the user object.
 exports.loginUser = async (req, res) => {
   const { username, password } = req.body // the req.body value is provided by the client
-
+  console.log('test');
   const user = await User.findByUsername(username);
   if (!user) return res.sendStatus(404);
 

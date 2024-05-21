@@ -43,6 +43,6 @@ exports.getFollowers = async (req, res) => {
 exports.getFollowed = async (req, res) => {
   const { followed_user_id } = req.params;
 
-  const followed = await Followed.getFollowed(followed_user_id);
+  const followed = await Follower.getFollowed(followed_user_id);
   res.status(200).json(followed);
 };

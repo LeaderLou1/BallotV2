@@ -13,10 +13,10 @@ import ChoicePage from './pages/ChoicePage'
 import TestPage from './pages/TestPage';
 
 export default function App() {
-  // const { setCurrentUser } = useContext(UserContext);
-  // useEffect(() => {
-  //   checkForLoggedInUser().then(setCurrentUser);
-  // }, [setCurrentUser]);
+  const { setCurrentUser } = useContext(UserContext);
+  useEffect(() => {
+    checkForLoggedInUser().then(setCurrentUser);
+  }, [setCurrentUser]);
 
   return <>
     <SiteHeadingAndNav />
@@ -27,7 +27,7 @@ export default function App() {
         <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/choose' element={<ChoicePage />} />
         <Route path='/users' element={<UsersPage />} />
-        <Route path='/test' element={<TestPage/>} />
+        <Route path='/test' element={<TestPage />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
       </Routes>

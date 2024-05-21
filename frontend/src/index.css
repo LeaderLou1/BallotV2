@@ -3,7 +3,8 @@ body {
   margin: 0;
 }
 
-input, label {
+input,
+label {
   display: block;
 }
 
@@ -44,6 +45,8 @@ form {
   border: 1px solid #CCC;
   width: 15rem;
   margin: 1rem auto;
+  position: relative;
+  z-index: 1;
 }
 
 /* automatically added by NavLink component */
