@@ -6,7 +6,7 @@ exports.up = function (knex) {
   return knex.schema.createTable("followers", function (table) {
     table.increments("id").primary();
     table
-      .integer("user_id")
+      .integer("follower_user_id")
       .unsigned()
       .notNullable()
       .references("id")

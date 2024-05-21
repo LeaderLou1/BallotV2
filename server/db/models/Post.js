@@ -5,7 +5,7 @@ class Post {
   static async create(user_id, content) {
     const query = `INSERT INTO posts (
             user_id,
-            content,
+            content
         )
         VALUES(?,?) RETURNING *`;
     const { rows } = await knex.raw(query, [
