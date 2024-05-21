@@ -1,9 +1,7 @@
-import Posts from './RepPosts';
+import Posts from "./RepPosts";
 
 const Feed = () => {
-  return(
-    <Posts></Posts>
-  )
-}
+  return <Posts></Posts>;
+};
 
 export default Feed;
