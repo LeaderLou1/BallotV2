@@ -4,9 +4,13 @@ const Follower = require("../db/models/Follower");
 
 exports.followRepresentative = async (req, res) => {
   const { followed_user_id } = req.body;
-  const { follower_user_id } = req.params
+  const { follower_user_id } = req.params;
 
-  const result = await Follower.followUser(follower_user_id, followed_user_id, username);
+  const result = await Follower.followUser(
+    follower_user_id,
+    followed_user_id,
+    username
+  );
   if (result) {
     const followedUser = await Follower.followUser(followed_user_id);
     res

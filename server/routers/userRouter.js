@@ -1,5 +1,5 @@
 const express = require("express");
-const followerControllers = require("../controllers/followerControllers")
+const followerControllers = require("../controllers/followerControllers");
 const userControllers = require("../controllers/userControllers");
 const postControllers = require("../controllers/postControllers");
 const checkAuthentication = require("../middleware/checkAuthentication");
@@ -51,20 +51,20 @@ userRouter.post(
   followerControllers.followRepresentative
 ); // Follow a representative
 
-// userRouter.get(
-//   "/:id/followers",
-//   checkAuthentication,
-//   userControllers.getFollowers
-// ); // Get followers
-// userRouter.get(
-//   "/:id/following",
-//   checkAuthentication,
-//   userControllers.getFollowing
-// ); // Get following
+userRouter.get(
+  "/:id/followers",
+  checkAuthentication,
+  userControllers.getFollowers
+); // Get followers
+userRouter.get(
+  "/:id/following",
+  checkAuthentication,
+  userControllers.getFollowing
+); // Get following
 
-// userRouter.delete(
-//   "/:id/follow/:userId",
-//   userControllers.unfollowRepresentative
-// ); // Unfollow a representative
+userRouter.delete(
+  "/:id/follow/:userId",
+  userControllers.unfollowRepresentative
+); // Unfollow a representative
 
 module.exports = userRouter;
