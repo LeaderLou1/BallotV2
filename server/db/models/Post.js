@@ -20,6 +20,12 @@ class Post {
     return result.rows;
   }
 
+  static async getAllPosts() {
+    const query = ` SELECT * FROM posts JOIN users ON posts.user_id = users.id`;
+    const result = await knex.raw(query, []);
+    return result.rows;
+  }
+
   static async delete(post_id) {
     const query = `DELETE * FROM posts WHERE id = ?`;
     const result = await knex.raw(query, [post_id]);

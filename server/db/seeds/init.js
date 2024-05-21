@@ -52,7 +52,7 @@ exports.seed = async (knex) => {
   await knex("posts").insert([
     { user_id: 1, content: "hello" },
     { user_id: 3, content: "bye" },
-    { user_id: 4, content: "hellobye" },
+    { user_id: 1, content: "hellobye" },
   ]);
 
   await knex("followers").insert([
