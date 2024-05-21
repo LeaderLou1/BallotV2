@@ -1,16 +1,16 @@
 const express = require("express");
+const followerControllers = require("../controllers/followerControllers");
 const userControllers = require("../controllers/userControllers");
 const postControllers = require("../controllers/postControllers");
 const checkAuthentication = require("../middleware/checkAuthentication");
 const postAuthorization = require("../middleware/postAuthorization");
-
 const userRouter = express.Router();
 
 // user related endpoints
-userRouter.post("/", userControllers.createUser); // Register
-userRouter.patch("/:id", checkAuthentication, userControllers.updateUser); // Update user information
-userRouter.get("/", checkAuthentication, userControllers.listUsers); // Show all users
-userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show one user
+userRouter.post("/", /*checkAuthentication,*/ userControllers.createUser); // Register
+userRouter.patch("/:id", /*checkAuthentication,*/ userControllers.updateUser); // Update user information
+userRouter.get("/", /*checkAuthentication,*/ userControllers.listUsers); // Show all users
+userRouter.get("/:id", /*checkAuthentication,*/ userControllers.showUser); // Show one user
 // userRouter.patch(
 //   "/:id/representative",
 //   checkAuthentication,
@@ -21,23 +21,23 @@ userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show o
 
 // user post related endpoints
 userRouter.post(
-  "/:id/posts",
-  checkAuthentication,
-  postAuthorization,
+  "/:user_id/posts",
+  /*checkAuthentication,*/
+  // postAuthorization,
   postControllers.create
 );
 // Create a post
 
+// GET /api/users/1/posts- get posts made by user 1.
 userRouter.get(
   "/:user_id/posts",
-  // checkAuthentication,
-  postControllers.findByUserId
+  /*checkAuthentication,*/ postControllers.findByUserId
 );
 // Get posts by a representative
 
 userRouter.delete(
-  "/:id/posts/:postId",
-  checkAuthentication,
+  "/:user_id/posts/:post_id",
+  /*checkAuthentication,*/
   postAuthorization,
   postControllers.delete
 );
@@ -45,54 +45,27 @@ userRouter.delete(
 
 // user follow related endpoints
 
-// userRouter.post(
-//   "/:id/follow",
-//   checkAuthentication,
-//   userControllers.followRepresentative
-// ); // Follow a representative
+userRouter.post(
+  "/:follower_user_id/followed_user_id",
+  // checkAuthentication,
+  followerControllers.followRepresentative
+); // Follow a representative
 
-// userRouter.get(
-//   "/:id/followers",
-//   checkAuthentication,
-//   userControllers.getFollowers
-// ); // Get followers
-// userRouter.get(
-//   "/:id/following",
-//   checkAuthentication,
-//   userControllers.getFollowing
-// ); // Get following
-
-// userRouter.delete(
-//   "/:id/follow/:userId",
-//   userControllers.unfollowRepresentative
-// ); // Unfollow a representative
-
-userRouter.get("/", checkAuthentication, userControllers.listUsers); // Show all users
-userRouter.get("/:id", checkAuthentication, userControllers.showUser); // Show one user
 userRouter.get(
-  "/:id/posts",
+  "/:follower_user_id/followers",
   checkAuthentication,
-  postControllers.findByUserId
-); // Get posts by a representative
-// userRouter.get(
-//   "/:id/followers",
-//   checkAuthentication,
-//   userControllers.getFollowers
-// ); // Get followers
-// userRouter.get(
-//   "/:id/following",
-//   checkAuthentication,
-//   userControllers.getFollowing
-// ); // Get following
+  followerControllers.getFollowers
+); // Get followers people who follow you
 
-// userRouter.delete(
-//   "/:id/follow/:userId",
-//   userControllers.unfollowRepresentative
-// ); // Unfollow a representative
-userRouter.delete(
-  "/:id/posts/:postId",
+userRouter.get(
+  "/:followed_user_id/followed",
   checkAuthentication,
-  postControllers.delete
-); // Delete a post
-// userRouter.delete("/:id", checkAuthentication, userControllers.);
+  followerControllers.getFollowed
+); // Get followed people who you follow
+
+userRouter.delete(
+  "/:followed_user_id/unfollowUser",
+  followerControllers.unfollowUser
+); // Unfollow a representative
+
 module.exports = userRouter;

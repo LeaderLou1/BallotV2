@@ -24,7 +24,7 @@ class User {
     this.id = id;
     this.username = username;
     this.#passwordHash = password_hash;
-    this.isRep = is_rep;
+    this.is_rep = is_rep;
     this.first_name = first_name;
     this.last_name = last_name;
     this.picture_url = picture_url;

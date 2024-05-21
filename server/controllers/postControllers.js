@@ -2,7 +2,8 @@ const Post = require('../db/models/Post');
 
 const postsControllers = {
     create: async (req, res) => {
-        const { user_id, content } = req.body;
+        const { content } = req.body;
+        const user_id = req.params.user_id
         try {
             const post = await Post.create(user_id, content);
             res.json(post);
@@ -24,9 +25,9 @@ const postsControllers = {
     },
 
     delete: async (req, res) => {
-        const { id } = req.params;
+        const { user_id, post_id } = req.params;
         try {
-            await Post.delete(id);
+            await Post.delete(post_id);
             res.sendStatus(204);
         } catch (error) {
             console.error(error);
