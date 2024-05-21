@@ -6,11 +6,7 @@ exports.followRepresentative = async (req, res) => {
   const { followed_user_id } = req.body;
   const { follower_user_id } = req.params;
 
-  const result = await Follower.followUser(
-    follower_user_id,
-    followed_user_id,
-    username
-  );
+  const result = await Follower.followUser(follower_user_id, followed_user_id);
   if (result) {
     const followedUser = await Follower.followUser(followed_user_id);
     res
@@ -47,6 +43,6 @@ exports.getFollowers = async (req, res) => {
 exports.getFollowed = async (req, res) => {
   const { followed_user_id } = req.params;
 
-  const followed = await Follower.getFollowed(followed_user_id);
+  const followed = await Followed.getFollowed(followed_user_id);
   res.status(200).json(followed);
 };
