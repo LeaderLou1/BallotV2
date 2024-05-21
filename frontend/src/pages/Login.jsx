@@ -26,15 +26,15 @@ export default function LoginPage() {
 
   return (
     <>
-      {/* <img src={logInImage} alt="" style={{ width: "100%", height: "100dvh", position: "absolute", top: 35, left: "50%", transform: "translateX(-50%)" }} />
-    <div style={{ position: "absolute", letterSpacing: "-2px", top: "50%", left: "50%", transform: "translate(-75%, -120%)", width: "900px" }}>
-      <Text style={{ fontWeight: 'bold', fontSize: "6rem", color: "Black", textAlign: "center" }}>Welcome to Ballot!</Text>
-      <br />
-      <Text size="2" style={{ color: "Black", fontSize: "4rem", fontWeight: 'bold', textAlign: "center", marginTop: "4rem" }}> Find Your Vote.</Text>
-      <br />
-      <br />
-      <Text size="5" style={{ color: "Black", textAlign: "center", marginTop: "6rem" }}>Create an account to help guide your voting decisions!<Link to="/choose">Sign Up!</Link></Text>
-    </div> */}
+      <img src={logInImage} alt="" style={{ width: "100%", height: "100dvh", position: "absolute", top: 35, left: "50%", transform: "translateX(-50%)" }} />
+      <div style={{ position: "absolute", letterSpacing: "-2px", top: "50%", left: "50%", transform: "translate(-75%, -120%)", width: "900px" }}>
+        <Text style={{ fontWeight: 'bold', fontSize: "6rem", color: "Black", textAlign: "center" }}>Welcome to Ballot!</Text>
+        <br />
+        <Text size="2" style={{ color: "Black", fontSize: "4rem", fontWeight: 'bold', textAlign: "center", marginTop: "4rem" }}> Find Your Vote.</Text>
+        <br />
+        <br />
+        <Text size="5" style={{ color: "Black", textAlign: "center", marginTop: "6rem" }}>Create an account to help guide your voting decisions!<Link to="/choose">Sign Up!</Link></Text>
+      </div>
 
       <center>
         <h1>Login</h1>
