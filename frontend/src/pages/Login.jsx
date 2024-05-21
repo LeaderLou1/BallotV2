@@ -1,20 +1,20 @@
 import { useContext, useState } from "react";
 import { useNavigate, Navigate, Link } from "react-router-dom";
 import { logUserIn } from "../adapters/auth-adapter";
-import { Text } from '@radix-ui/themes';
-import logInImage from "../Photo/LogIn.png"
+import { Text } from "@radix-ui/themes";
+import logInImage from "../Photo/LogIn.png";
 import CurrentUserContext from "../contexts/current-user-context";
 
 export default function LoginPage() {
   const navigate = useNavigate();
-  const [errorText, setErrorText] = useState('');
+  const [errorText, setErrorText] = useState("");
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText("");
     const formData = new FormData(event.target);
-    console.log(formData)
+    console.log(formData);
     console.log(Object.fromEntries(formData));
     const [user, error] = await logUserIn(Object.fromEntries(formData));
     if (error) return setErrorText(error.message);
@@ -36,14 +36,26 @@ export default function LoginPage() {
       <Text size="5" style={{ color: "Black", textAlign: "center", marginTop: "6rem" }}>Create an account to help guide your voting decisions!<Link to="/choose">Sign Up!</Link></Text>
     </div> */}
 
-      <center><h1>Login</h1></center>
+      <center>
+        <h1>Login</h1>
+      </center>
       <form onSubmit={handleSubmit} aria-labelledby="login-heading">
-        <h2 id='login-heading'>Log back in!</h2>
+        <h2 id="login-heading">Log back in!</h2>
         <label htmlFor="username">Username</label>
-        <input type="text" autoComplete="username" id="username" name="username" />
+        <input
+          type="text"
+          autoComplete="username"
+          id="username"
+          name="username"
+        />
 
         <label htmlFor="password">Password</label>
-        <input type="password" autoComplete="current-password" id="password" name="password" />
+        <input
+          type="password"
+          autoComplete="current-password"
+          id="password"
+          name="password"
+        />
 
         <button>Log in!</button>
       </form>
