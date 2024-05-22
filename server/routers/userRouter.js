@@ -17,13 +17,6 @@ userRouter.patch("/:id/bio", checkAuthentication, userControllers.updateUserBio)
 
 userRouter.get("/", /*checkAuthentication,*/ userControllers.listUsers); // Show all users
 userRouter.get("/:id", /*checkAuthentication,*/ userControllers.showUser); // Show one user
-// userRouter.patch(
-//   "/:id/representative",
-//   checkAuthentication,
-//   userControllers.updateToRepresentative
-// ); // Update user to representative
-
-// userRouter.delete("/:id", checkAuthentication, userControllers.deleteUser);
 
 // user post related endpoints
 userRouter.post(
@@ -34,12 +27,21 @@ userRouter.post(
 );
 // Create a post
 
-// GET /api/users/1/posts- get posts made by user 1.
+// GET /api/users/:user_id/posts - get posts made by user
 userRouter.get(
   "/:user_id/posts",
   /*checkAuthentication,*/ postControllers.findByUserId
 );
-// Get posts by a representative
+// Get posts by a user
+
+// PATCH /api/users/:user_id/posts/:post_id - update a post
+userRouter.patch(
+  "/:user_id/posts/:post_id",
+  /*checkAuthentication,*/
+  postAuthorization,
+  postControllers.update
+);
+// Update a post
 
 userRouter.delete(
   "/:user_id/posts/:post_id",

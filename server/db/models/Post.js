@@ -28,9 +28,19 @@ class Post {
   }
 
   static async delete(post_id) {
-    const query = `DELETE * FROM posts WHERE id = ?`;
+    const query = `DELETE FROM posts WHERE id = ?`; // Fixed DELETE query
     const result = await knex.raw(query, [post_id]);
     return result;
+  }
+
+  static async update(post_id, heading, content) {
+    const query = `
+      UPDATE posts
+      SET heading = ?, content = ?
+      WHERE id = ?
+      RETURNING *`;
+    const { rows } = await knex.raw(query, [heading, content, post_id]);
+    return rows[0];
   }
 
   // static async getPostofFollowed(user_id) {
