@@ -67,10 +67,7 @@ class User {
     first_name,
     last_name,
     zipcode,
-    bio = null,
-    location = null,
-    state,
-    picture_url = null
+    state
   ) {
     // modify to determine user is represenentstive
     // hash the plain-text password using bcrypt before storing it in the database
@@ -83,12 +80,9 @@ class User {
       first_name,
       last_name,
       zipcode,
-      bio,
-      location,
-      state,
-      picture_url
+      state
     )
-      VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING *`;
+      VALUES (?,?,?,?,?,?,?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       password_hash,
@@ -96,10 +90,7 @@ class User {
       first_name,
       last_name,
       zipcode,
-      bio,
-      location,
-      state,
-      picture_url,
+      state
     ]);
     const user = rows[0];
     return new User(user);
