@@ -25,24 +25,26 @@ const CreatePost = () => {
 
   return (
     <>
-      <Flex justify="center" style={{ marginBottom: "30px" }}>
-        <Text size="9" weight="bold">
-          Create A Post!
-        </Text>
-      </Flex>
+     
 
       <Flex justify="center">
-        <Card style={{ width: "450px" }}>
+        <Card style={{ width: "600px"}}>
+      
+        <Flex justify="center" style={{ marginBottom: "30px" }}>
+           <Text size="7" weight="bold">
+               Create A Post!
+           </Text>
+       </Flex>
+
           <form onSubmit={handleSubmit}>
             <Flex justify="center">
               <Box
-                width="450px"
-                style={{ margin: "20px", paddingLeft: "50px" }}
+                width="700px"
               >
                 <Flex direction="column" gap="3">
                   <Text
                     as="div"
-                    size="7"
+                    size="4"
                     weight="bold"
                     style={{ marginBottom: "15px" }}
                   >
@@ -50,13 +52,13 @@ const CreatePost = () => {
                   </Text>
                   <Box maxWidth="300px">
                     <TextArea
-                      size="3"
+                      size="1"
                       placeholder="Add a heading…"
                       value={heading}
                       onChange={(e) => setHeading(e.target.value)}
                     />
                   </Box>
-                  <Text size="6" weight="bold">
+                  <Text size="4" weight="bold">
                     Add a caption:
                   </Text>
                   <Box maxWidth="300px">
@@ -71,7 +73,7 @@ const CreatePost = () => {
               </Box>
             </Flex>
 
-            <Flex justify="end" style={{ marginRight: "15px" }}>
+            <Flex justify="end" style={{ margin: "15px" }}>
               <Button variant="surface" type="submit">
                 <Text size="4">Post</Text>
               </Button>

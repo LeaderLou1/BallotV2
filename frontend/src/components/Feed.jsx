@@ -1,6 +1,7 @@
 import Posts from "./RepPosts";
 import React, { useEffect, useState } from "react";
 import { getAllPosts } from "../adapters/post-adapter";
+import { ScrollArea } from "@radix-ui/themes";
 
 const Feed = () => {
   const [feed, setFeed] = useState([]);
@@ -18,16 +19,13 @@ const Feed = () => {
 
   return (
     <div>
+      <ScrollArea type="always" scrollbars="vertical" style={{ height:"100dvh" }}>
       {feed.map((post) => (
         <Posts post={post} />
       ))}
-      {/* {feed.map((post) => (
-        <div key={post.id}>
-          <h3>{post.title}</h3>
-          <p>{post.content}</p>
-        </div>
-      ))} */}
+      </ScrollArea>
     </div>
+
   );
 };
 

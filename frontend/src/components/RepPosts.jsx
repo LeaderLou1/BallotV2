@@ -15,24 +15,26 @@ const RepPosts = ({ post }) => {
     return(
     <div>
       {isModalOpen && <PostModal closeModal={closeModal}/>}
- <Flex justify="center" onClick={openModal} style={{ cursor: 'pointer' }}>
- <Card style={{width:"700px"}}>
-   <Box style={{ background: 'var(--gray-a2)', borderRadius: 'var(--radius-3)'}}>
+     <Flex justify="center" onClick={openModal} style={{ cursor: 'pointer', marginBottom: "2rem" }}>
+         <Card style={{width:"800px"}}>
+        <Box style={{ background: 'var(--gray-a2)', borderRadius: 'var(--radius-3)'}}>
         <Container size="2" style={{ background: 'white' }}>
             <Flex gap="3">
-              <Box span={1} style={{ margin: "10px", width: "100px" }}>
+                
+              <Box span={1} style={{ margin: "10px", width: "100px", marginLeft:"20px", left: "0" }}>
                 {" "}
                 {/* Set span to 1 for the first column */}
                 <Avatar size="6" src={post.picture_url} fallback="A"></Avatar>
-                <Text size="3" weight="bold">
+                <Text size="2" weight="bold">
                   {post.username}
                 </Text>
                 <img
                   src={verifiedIcon}
                   alt="Verified"
-                  style={{ width: "20px", height: "20px" }}
+                  style={{ width: "15px", height: "15px" }}
                 />
               </Box>
+             
               <Box span={1} style={{ margin: "10px" }}>
                 <Card asChild>
                   <Box style={{ padding: "20px" }}>
@@ -56,9 +58,10 @@ const RepPosts = ({ post }) => {
                       </Text>
                     </a>
                   </Box>
+                 
                 </Card>
               </Box>
-            </Flex>
+              </Flex>
 
             {/* <Flex>
                 <img src={notHearted} alt="" style={{width:'25px', height:"25px", marginLeft: "12rem"}}/>

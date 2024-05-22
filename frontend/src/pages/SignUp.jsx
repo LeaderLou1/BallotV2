@@ -63,11 +63,11 @@ export default function SignUpPage() {
 <div style={{ position: "relative" }}>
     <img src={signUpImg} alt="" style={{ width: "100%", height: "100dvh", position: "absolute", top: -1, left: "50%", transform: "translateX(-50%)", zIndex: -1 }} />
      <Flex justify="center">
-    <Card style={{ width:"400px", height: "600px", top: 60}}>
+    <Card style={{ width:"400px", height: "730px", top: 30}}>
     <center><h1>Sign Up</h1></center> 
-    <br />
+    
     <form onSubmit={handleSubmit} onChange={handleChange} aria-labelledby="create-heading" style={{ zIndex: 1, background:"white" }}>
-        <h2 id="create-heading">Create New User</h2>
+        <h4 id="create-heading">Create New User</h4>
 
         <label htmlFor="first">First name</label>
         <input
@@ -145,7 +145,6 @@ export default function SignUpPage() {
         <br />
         <button>Sign Up Now!</button>
     </form>
-    <br />
     <center><p>Already have an account with us? <Link to="/">Log in!</Link></p></center>
     </Card>
     </Flex>
