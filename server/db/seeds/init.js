@@ -18,11 +18,11 @@ exports.seed = async (knex) => {
     true,
     "Cool",
     "Cat",
-    "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
     "11203",
+    "Read More about me..",
+    "Brooklyn",
     "New York",
-    "828 Midwood St",
-    "The Coolest Cat"
+    "https://images.pexels.com/photos/45201/kitty-cat-kitten-pet-45201.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
   );
   await User.create(
     "l33t-guy",
@@ -30,11 +30,11 @@ exports.seed = async (knex) => {
     false,
     "Leet",
     "Guy",
-    "https://static.wikia.nocookie.net/cso/images/2/2d/Leet_s.png/revision/latest?cb=20140812035058",
     "11225",
+    "Catch me on Counter Strike",
+    "Brooklyn",
     "New York",
-    "49 Crown St",
-    "Catch me on Counter Strike"
+    "https://static.wikia.nocookie.net/cso/images/2/2d/Leet_s.png/revision/latest?cb=20140812035058"
   );
   await User.create(
     "wowow",
@@ -42,11 +42,11 @@ exports.seed = async (knex) => {
     true,
     "Wow",
     "Wow",
-    "https://www.billboard.com/wp-content/uploads/media/Jay-Rock-Wow-Freestyle-Kendrick-Lamar-vid-2018-billboard-1548.jpg",
     "11203",
+    "Wow I'm outside",
+    "Brooklyn",
     "New York",
-    "464 East 56th St",
-    "Wow I'm outside"
+    "https://www.billboard.com/wp-content/uploads/media/Jay-Rock-Wow-Freestyle-Kendrick-Lamar-vid-2018-billboard-1548.jpg"
   );
 
   await knex("posts").insert([

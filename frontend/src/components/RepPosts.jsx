@@ -15,6 +15,7 @@ import notHearted from "../Photo/notHearted.png";
 import CommentComp from "./CommentComp";
 
 const RepPosts = ({ post }) => {
+  console.log(post);
   return (
     <Flex justify="center">
       <Card style={{ width: "700px" }}>
