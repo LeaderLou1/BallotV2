@@ -15,11 +15,11 @@ class User {
     is_rep,
     first_name,
     last_name,
-    picture_url,
     zipcode,
-    state,
-    location,
     bio,
+    location,
+    state,
+    picture_url,
   }) {
     this.id = id;
     this.username = username;
@@ -27,11 +27,11 @@ class User {
     this.is_rep = is_rep;
     this.first_name = first_name;
     this.last_name = last_name;
-    this.picture_url = picture_url;
     this.zipcode = zipcode;
-    this.state = state;
-    this.location = location;
     this.bio = bio;
+    this.location = location;
+    this.state = state;
+    this.picture_url = picture_url;
   }
 
   // This instance method takes in a plain-text password and returns true if it matches
@@ -67,7 +67,10 @@ class User {
     first_name,
     last_name,
     zipcode,
-    state
+    bio = null,
+    location = null,
+    state,
+    picture_url = null
   ) {
     // modify to determine user is represenentstive
     // hash the plain-text password using bcrypt before storing it in the database
@@ -80,8 +83,12 @@ class User {
       first_name,
       last_name,
       zipcode,
-      state)
-      VALUES (?,?,?,?,?,?,?) RETURNING *`;
+      bio,
+      location,
+      state,
+      picture_url
+    )
+      VALUES (?,?,?,?,?,?,?,?,?,?) RETURNING *`;
     const { rows } = await knex.raw(query, [
       username,
       password_hash,
@@ -89,7 +96,10 @@ class User {
       first_name,
       last_name,
       zipcode,
-      state
+      bio,
+      location,
+      state,
+      picture_url,
     ]);
     const user = rows[0];
     return new User(user);

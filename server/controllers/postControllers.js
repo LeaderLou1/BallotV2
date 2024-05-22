@@ -2,10 +2,10 @@ const Post = require("../db/models/Post");
 
 const postsControllers = {
   create: async (req, res) => {
-    const { content } = req.body;
+    const { heading, content } = req.body;
     const user_id = req.params.user_id;
     try {
-      const post = await Post.create(user_id, content);
+      const post = await Post.create(user_id, heading, content);
       res.json(post);
     } catch (error) {
       console.error(error);

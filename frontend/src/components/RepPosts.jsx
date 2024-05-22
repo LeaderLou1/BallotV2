@@ -15,6 +15,7 @@ import notHearted from "../Photo/notHearted.png";
 import CommentComp from "./CommentComp";
 
 const RepPosts = ({ post }) => {
+  console.log(post);
   return (
     <Flex justify="center">
       <Card style={{ width: "700px" }}>
@@ -30,7 +31,7 @@ const RepPosts = ({ post }) => {
                 {" "}
                 {/* Set span to 1 for the first column */}
                 <Avatar size="6" src={post.picture_url} fallback="A"></Avatar>
-                <Text size="5" weight="bold">
+                <Text size="3" weight="bold">
                   {post.username}
                 </Text>
                 <img
@@ -46,9 +47,16 @@ const RepPosts = ({ post }) => {
                       href="#"
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      {/* <Text as="div" size="7" weight="bold" style={{marginBottom: '15px'}}>
-                            Heading
-                        </Text> */}
+                      {
+                        <Text
+                          as="div"
+                          size="5"
+                          weight="bold"
+                          style={{ marginBottom: "15px" }}
+                        >
+                          {post.heading}
+                        </Text>
+                      }
 
                       <Text as="div" color="gray" size="4">
                         {post.content}

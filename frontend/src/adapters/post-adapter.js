@@ -7,8 +7,11 @@ import {
 
 const baseUrl = "/api/users";
 
-export const createPost = async ({ user_id, content }) =>
-  fetchHandler(`${baseUrl}/${user_id}/posts`, getPostOptions({ content }));
+export const createPost = async ({ user_id, heading, content }) =>
+  fetchHandler(
+    `${baseUrl}/${user_id}/posts`,
+    getPostOptions({ heading, content })
+  );
 
 // GET /api/users/:user_id/posts
 export const getPostByUserId = async (user_id) =>
