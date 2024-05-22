@@ -63,19 +63,18 @@ userRouter.get(
   "/:follower_user_id/followers",
   checkAuthentication,
   followerControllers.getFollowers
-); // Get followers people who follow you
+); // Get followers (people who follow you)
 
 userRouter.get(
   "/:followed_user_id/followed",
   checkAuthentication,
   followerControllers.getFollowed
-); // Get followed people who you follow
+); // Get followed people (people you follow)
 
-//Get all posts
-
+// Unfollow a user
 userRouter.delete(
-  "/:followed_user_id/unfollowUser",
+  "/:follower_user_id/unfollowUser",
   followerControllers.unfollowUser
-); // Unfollow a representative
+);
 
 module.exports = userRouter;
