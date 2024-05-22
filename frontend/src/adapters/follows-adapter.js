@@ -16,14 +16,14 @@ export const followUser = async ({ follower_user_id, followed_user_id }) =>
 // Unfollow a user
 export const unfollowUser = async ({ follower_user_id, followed_user_id }) =>
     fetchHandler(
-        `${baseUrl}/${follower_user_id}/unfollowUser`,
+        `${baseUrl}/${follower_user_id}/unfollowUser?followed_user_id=${followed_user_id}`,
         deleteOptions()
     );
 
 // Get followers of a user
-export const getFollowers = async (follower_user_id) =>
-    fetchHandler(`${baseUrl}/${follower_user_id}/followers`);
+export const getFollowers = async (followed_user_id) =>
+    fetchHandler(`${baseUrl}/${followed_user_id}/followers`);
 
 // Get followed users
-export const getFollowedUsers = async (followed_user_id) =>
-    fetchHandler(`${baseUrl}/${followed_user_id}/followed`);
+export const getFollowedUsers = async (follower_user_id) =>
+    fetchHandler(`${baseUrl}/${follower_user_id}/followed`);

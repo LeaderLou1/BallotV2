@@ -60,13 +60,13 @@ userRouter.post(
 ); // Follow a representative
 
 userRouter.get(
-  "/:follower_user_id/followers",
+  "/:followed_user_id/followers",
   checkAuthentication,
   followerControllers.getFollowers
 ); // Get followers (people who follow you)
 
 userRouter.get(
-  "/:followed_user_id/followed",
+  "/:follower_user_id/followed",
   checkAuthentication,
   followerControllers.getFollowed
 ); // Get followed people (people you follow)
