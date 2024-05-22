@@ -35,6 +35,8 @@ const AboutPage = () => {
           >
             Why Ballot?
           </Text>
+
+          
         </Box>
       </Box>
     </Flex>
