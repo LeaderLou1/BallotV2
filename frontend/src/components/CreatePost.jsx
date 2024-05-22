@@ -7,19 +7,17 @@ import CurrentUserContext from "../contexts/current-user-context";
 const CreatePost = () => {
   const [errorText, setErrorText] = useState("");
   const [content, setContent] = useState("");
+  const [heading, setHeading] = useState("");
   const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
   const [user_id] = useState(currentUser.id); // Replace with actual user ID or get it from context/auth
-
-  console.log(currentUser.id);
-  console.log(content);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     setErrorText("");
 
     try {
-      await createPost({ user_id, content });
-      console.log({ user_id, content });
+      await createPost({ user_id, heading, content });
+      console.log({ user_id, heading, content });
     } catch (error) {
       setErrorText(error.message);
     }
@@ -42,6 +40,22 @@ const CreatePost = () => {
                 style={{ margin: "20px", paddingLeft: "50px" }}
               >
                 <Flex direction="column" gap="3">
+                  <Text
+                    as="div"
+                    size="7"
+                    weight="bold"
+                    style={{ marginBottom: "15px" }}
+                  >
+                    Add a heading:
+                  </Text>
+                  <Box maxWidth="300px">
+                    <TextArea
+                      size="3"
+                      placeholder="Add a heading…"
+                      value={heading}
+                      onChange={(e) => setHeading(e.target.value)}
+                    />
+                  </Box>
                   <Text size="6" weight="bold">
                     Add a caption:
                   </Text>

@@ -47,9 +47,16 @@ const RepPosts = ({ post }) => {
                       href="#"
                       style={{ textDecoration: "none", color: "inherit" }}
                     >
-                      {/* <Text as="div" size="7" weight="bold" style={{marginBottom: '15px'}}>
-                            Heading
-                        </Text> */}
+                      {
+                        <Text
+                          as="div"
+                          size="5"
+                          weight="bold"
+                          style={{ marginBottom: "15px" }}
+                        >
+                          {post.heading}
+                        </Text>
+                      }
 
                       <Text as="div" color="gray" size="4">
                         {post.content}
