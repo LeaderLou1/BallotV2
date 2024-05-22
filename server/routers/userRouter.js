@@ -8,7 +8,13 @@ const userRouter = express.Router();
 
 // user related endpoints
 userRouter.post("/", /*checkAuthentication,*/ userControllers.createUser); // Register
-userRouter.patch("/:id", /*checkAuthentication,*/ userControllers.updateUser); // Update user information
+
+// Update user information
+userRouter.patch("/:id", checkAuthentication, userControllers.updateUser);
+
+// Update user bio
+userRouter.patch("/:id/bio", checkAuthentication, userControllers.updateUserBio); // New route for updating bio
+
 userRouter.get("/", /*checkAuthentication,*/ userControllers.listUsers); // Show all users
 userRouter.get("/:id", /*checkAuthentication,*/ userControllers.showUser); // Show one user
 // userRouter.patch(

@@ -67,15 +67,26 @@ exports.updateUser = async (req, res) => {
   const updatedUser = await User.update(
     id,
     username,
-    is_rep,
     first_name,
     last_name,
     picture_url,
     zipcode,
     state,
-    bio,
-    location
+    location,
+    bio
   );
+  if (!updatedUser) return res.sendStatus(404);
+  res.send(updatedUser);
+};
+
+exports.updateUserBio = async (req, res) => {
+  const { id } = req.params;
+  const { bio } = req.body;
+
+  // Ensure user is authorized to update their own profile
+  if (!isAuthorized(id, req.session)) return res.sendStatus(403);
+
+  const updatedUser = await User.updateBio(id, bio);
   if (!updatedUser) return res.sendStatus(404);
   res.send(updatedUser);
 };
