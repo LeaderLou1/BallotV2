@@ -6,15 +6,18 @@ import HomePageProvider from './contexts/HomePageProvider.jsx';
 import './index.css';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
+import UserBioProvider from './contexts/UserBioProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <UserContextProvider>
     <HomePageProvider>
+    <UserBioProvider>
       <BrowserRouter>
         <Theme>
-          <App />
+          <App/>
         </Theme>
       </BrowserRouter>
+     </UserBioProvider>
     </HomePageProvider>
   </UserContextProvider>,
 );

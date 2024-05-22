@@ -4,10 +4,18 @@ import verifiedIcon from '../Photo/Verified.png'
 import heart from '../Photo/heart.png'
 import notHearted from '../Photo/notHearted.png'
 import CommentComp from './CommentComp'
+import {useState} from 'react'
+import PostModal from './PostModal'
 
 const RepPosts = () => {
+    const [isModalOpen, setIsModalOpen] = useState(false);
+    const openModal = () => setIsModalOpen(true);
+    const closeModal = () => setIsModalOpen(false);
+
     return(
-  <Flex justify="center">
+    <div>
+      {isModalOpen && <PostModal closeModal={closeModal}/>}
+ <Flex justify="center" onClick={openModal} style={{ cursor: 'pointer' }}>
  <Card style={{width:"700px"}}>
    <Box style={{ background: 'var(--gray-a2)', borderRadius: 'var(--radius-3)'}}>
         <Container size="2" style={{ background: 'white' }}>
@@ -47,6 +55,8 @@ const RepPosts = () => {
     </Box>
     </Card>
     </Flex>
+
+    </div>
     )
 }
 

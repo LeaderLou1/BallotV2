@@ -44,7 +44,7 @@ export default function SignUpPage() {
     if (error) return setErrorText(error.message);
 
     setCurrentUser(user);
-    navigate('/');
+    navigate('/home');
   };
 
   const handleChange = (event) => {
@@ -146,7 +146,7 @@ export default function SignUpPage() {
         <button>Sign Up Now!</button>
     </form>
     <br />
-    <center><p>Already have an account with us? <Link to="/login">Log in!</Link></p></center>
+    <center><p>Already have an account with us? <Link to="/">Log in!</Link></p></center>
     </Card>
     </Flex>
 </div>

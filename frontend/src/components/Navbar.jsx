@@ -1,110 +1,104 @@
-import { useState, useContext } from 'react';
-import { NavLink, useNavigate} from "react-router-dom";
+import { useContext } from 'react';
+import { NavLink, useNavigate } from "react-router-dom";
 import { logUserOut } from "../adapters/auth-adapter";
-import { Flex, Box, Button, Separator } from '@radix-ui/themes';
+import { Flex, Box, Button, Separator, Text } from '@radix-ui/themes';
 import homeIcon from '../Photo/homeIcon.png';
 import profileIcon from '../Photo/placeholder.png';
 import aboutIcon from '../Photo/aboutIcon.png';
-import logo from '../Photo/Logo.png'
+import logo from '../Photo/Logo.png';
 import CurrentUserContext from '../contexts/current-user-context';
 
 const NavBar = () => {
-    const [hoveredIcon, setHoveredIcon] = useState(null);
     const { currentUser, setCurrentUser } = useContext(CurrentUserContext);
+    const navigate = useNavigate();
 
     const handleLogout = async () => {
-        logUserOut();
+        await logUserOut();
         setCurrentUser(null);
-      };
+        navigate('/');
+    };
 
     return (
-        <Box minHeight="100vh" width='300px' style={{ background: 'white', border: ".2px solid black", borderRightWidth:".2px"}}> 
-            <>
-                <Flex columns={{ initial: '1', md: '2' }} gap="2" width="auto">
-                  <img src={logo} alt="Verified" style={{ width: '6rem', height: '6rem', marginTop: '4rem', marginLeft: '1rem'}} />
-                  <h1 style={{fontSize: '5rem', fontWeight: 'bold' }}>Ballot</h1>
+        <Box 
+            minHeight="100vh" 
+            width={{ initial: '100vw', md: '300px' }} 
+            style={{ background: 'white', borderRight: ".2px solid black", padding: '1rem' }}
+        >
+            <Flex direction="column" align="center">
+                <Flex direction="row" align="center" gap="0.5rem">
+                    <img src={logo} alt="Verified" style={{ width: '30%', height: '30%' }} />
+                    <Text size={{ initial: '3', md: '9' }} fontWeight="bold">Ballot</Text>
                 </Flex>
+             
+         
+            <Separator color="black" orientation="horizontal" size="3" />
+            </Flex>
+           
 
-                <Flex justify='center'>
-                    <Separator color="black" orientation="horizontal" size="3" />
-                </Flex>
-                <br />
-
-                <Flex>
-                <NavLink to='/'>
+            <Flex direction="column" align="center" gap="1rem" style={{ marginTop: '2rem' }}>
+                <NavLink to='/home'>
                     <Button
-                        size="4"
-                        color='grey'
+                        size={{ initial: '2', md: '4' }}
                         variant='ghost'
-                        style={{ fontSize: '30px', width: '300px', height: '60px', marginBottom: '.5rem' }}
-                        onMouseEnter={() => setHoveredIcon('home')}
-                        onMouseLeave={() => setHoveredIcon(null)}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}
                     >
                         <img
                             src={homeIcon}
                             alt="Home"
-                            style={{ width: hoveredIcon === 'home' ? '25px' : '20px', height: hoveredIcon === 'home' ? '25px' : '20px' }}
+                            style={{ width: '20px', height: '20px' }}
                         />
                         Home
                     </Button>
-                    </NavLink>
-                </Flex>
+                </NavLink>
+                <Separator color="black" orientation="horizontal" size="2" />
 
-                <Flex justify='center'>
-                    <Separator color="black" orientation="horizontal" size="3.5" />
-                </Flex>
-
-                <Flex> <NavLink to={`/users/${currentUser.id}`} end={true}>
+                <NavLink to={currentUser ? `/users/${currentUser.id}` : '/'}>
                     <Button
-                        size="3"
+                        size={{ initial: '2', md: '4' }}
                         variant='ghost'
-                        style={{ fontSize: '30px', width: '300px', height: '60px', marginBottom: '.5rem' }}
-                        onMouseEnter={() => setHoveredIcon('profile')}
-                        onMouseLeave={() => setHoveredIcon(null)}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}
                     >
                         <img
                             src={profileIcon}
                             alt="Profile"
-                            style={{ width: hoveredIcon === 'profile' ? '25px' : '20px', height: hoveredIcon === 'profile' ? '25px' : '20px' }}
+                            style={{ width: '20px', height: '20px' }}
                         />
                         Profile
                     </Button>
-                    </NavLink>
-                </Flex>
+                </NavLink>
+                <Separator color="black" orientation="horizontal" size="2" />
 
-                <Flex justify='center'>
-                    <Separator color="black" orientation="horizontal" size="3.5" />
-                </Flex>
-
-                <Flex>
+                <NavLink to='/about'>
                     <Button
-                        size="4"
+                        size={{ initial: '2', md: '4' }}
                         variant='ghost'
-                        style={{ fontSize: '30px', width: '300px', height: '60px', marginBottom: '.5rem' }}
-                        onMouseEnter={() => setHoveredIcon('about')}
-                        onMouseLeave={() => setHoveredIcon(null)}
+                        style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}
                     >
                         <img
                             src={aboutIcon}
                             alt="About"
-                            style={{ width: hoveredIcon === 'about' ? '25px' : '20px', height: hoveredIcon === 'about' ? '25px' : '20px' }}
+                            style={{ width: '20px', height: '20px' }}
                         />
                         About
                     </Button>
-                </Flex>
+                </NavLink>
+                <Separator color="black" orientation="horizontal" size="2" />
+            </Flex>
 
-                <div style={{ marginTop: "335px" }}>
-                    <Flex>
-                    <NavLink to={'/login'}>
-                        <Button color="gray" variant="solid" onClick={handleLogout} highContrast style={{ fontSize: '30px', width: '300px', height: '60px' }}>
-                            Log Out
-                        </Button>
-                        </NavLink>
-                    </Flex>
-                </div>
-            </>
+            <Flex justify='center' style={{ marginTop: 'auto' }}>
+                <Button 
+                    color="gray" 
+                    variant="solid" 
+                    onClick={handleLogout} 
+                    highContrast 
+                    size={{ initial: '2', md: '4' }}
+                    style={{ width: '100%' }}
+                >
+                    Log Out
+                </Button>
+            </Flex>
         </Box>
     );
-}
+};
 
 export default NavBar;

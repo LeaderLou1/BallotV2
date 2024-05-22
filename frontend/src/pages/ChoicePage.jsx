@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import { Flex, Text, Box, Grid, Container, Button } from '@radix-ui/themes';
+import { Flex, Text, Container, Button } from '@radix-ui/themes';
 import Img from '../Photo/PoliticsImg1.jpeg'
 import { useContext } from 'react'
 import UserContext from '../contexts/current-user-context'
@@ -17,8 +17,7 @@ const ChoicePage = () => {
         setIsRep(true)
         console.log(isRep)
     }
-    
-   
+
     return(
         <>
         <Flex>

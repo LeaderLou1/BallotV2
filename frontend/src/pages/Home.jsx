@@ -29,9 +29,7 @@ export default function HomePage() {
   return (
     <Flex columns={{ initial: '1', md: '2' }} width="100vw">
       <NavBar />
-     
-      
-     
+
       <Box minHeight='100vh' width='1140px' style={{ background: 'white' }}>
         <Grid width='100%' columns="2">
           <Flex justify="end" style={{ marginRight: "10rem" }}>

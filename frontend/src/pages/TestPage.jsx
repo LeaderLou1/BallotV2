@@ -1,41 +1,51 @@
-import { Flex, Box, Container, Card, Text, Theme, Grid, Button, Avatar, TextField, TextArea} from '@radix-ui/themes';
+import { Flex, Box, Separator, Grid, Text } from '@radix-ui/themes';
+import UserInfo from '../components/UserInfo';
+import CurrentUserContext from "../contexts/current-user-context";
+import { useEffect, useContext, useState } from 'react';
+import { getPostByUserId } from "../adapters/post-adapter";
+import PostCards from '../components/PostCards';
 
 const TestPage = () => {
-    return(
-        <>
-           <Flex justify="center" style={{marginBottom: "30px"}}>
-             <Text size='9' weight="bold">Create A Post!</Text>
-           </Flex>
-         
-           <Flex justify="center">
-           <Card style={{width:'450px'}}>
-           <Flex justify='center'>
-             <Box width="450px" style={{margin: "20px", paddingLeft: "50px"}}>
-               <Flex direction="column" gap="3">
-                 <Text size='6' weight="bold">Add a heading:</Text>
-                 <Box maxWidth="250px">
-                   <TextArea size="2" placeholder="Grab the citizens attention!" />
-                 </Box>
-                 <Text size='6' weight="bold">Add a caption:</Text>
-                 <Box maxWidth="300px">
-                   <TextArea size="3" placeholder="Add a caption…" />
-                 </Box>
-               </Flex>
-             </Box>
-           </Flex>
+  const { currentUser } = useContext(CurrentUserContext);
+  const [posts, setPost] = useState([]);
+  const [errorText, setErrorText] = useState('');
 
-           <Flex justify="end" style={{marginRight:'15px'}}>
-              <Button variant="surface">
-                <Text size="4"> Post</Text>
-              </Button>
-            </Flex>
+  useEffect(() => {
+    const fetchPosts = async () => {
+        const [userPost, error] = await getPostByUserId(currentUser?.id);
+        if (error) return setErrorText(error.message);
+        setPost(userPost);
+    };
+    fetchPosts();
+  }, [currentUser]);
 
-        </Card>
-        </Flex>
+  useEffect(() => {
+    console.log('posts:', posts);
+  }, [posts]);
 
+  return (
+    <>
+      <Flex justify="start" style={{ marginLeft: "50px" }}>
+        <UserInfo />
+      </Flex>
+
+      <Box style={{ paddingLeft: "90px", paddingRight: "90px" }}>
+        <Separator orientation="horizontal" size="4" />
+      </Box>
        
-      </>
-    )
+      <Flex justify="center" style={{ margin: '20px' }}>
+        <Text size="9">Posts</Text>
+      </Flex>
+
+      <Flex justify="center">
+        <Grid columns="3" gap="3" rows="repeat(2, 64px)" width="auto">
+          {posts.map((post) => (
+            <PostCards key={post.id} username={currentUser?.username} text={post?.content} />
+          ))}
+        </Grid>
+      </Flex>
+    </>
+  );
 }
 
-export default TestPage
+export default TestPage;
