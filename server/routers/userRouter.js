@@ -63,6 +63,8 @@ userRouter.get(
   followerControllers.getFollowed
 ); // Get followed people who you follow
 
+//Get all posts
+
 userRouter.delete(
   "/:followed_user_id/unfollowUser",
   followerControllers.unfollowUser

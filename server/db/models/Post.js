@@ -1,13 +1,14 @@
 const knex = require("../knex");
 
 class Post {
-  static async create(user_id, content) {
+  static async create(user_id, heading, content) {
     const query = `INSERT INTO posts (
             user_id,
+            heading,
             content
         )
-        VALUES(?,?) RETURNING *`;
-    const { rows } = await knex.raw(query, [user_id, content]);
+        VALUES(?,?,?) RETURNING *`;
+    const { rows } = await knex.raw(query, [user_id, heading, content]);
     const post = rows[0];
     return post;
   }
@@ -17,6 +18,12 @@ class Post {
             SELECT * FROM posts WHERE user_id = ?
         `;
     const result = await knex.raw(query, [user_id]);
+    return result.rows;
+  }
+
+  static async getAllPosts() {
+    const query = ` SELECT * FROM posts JOIN users ON posts.user_id = users.id`;
+    const result = await knex.raw(query, []);
     return result.rows;
   }
 
