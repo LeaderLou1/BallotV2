@@ -31,7 +31,7 @@ const RepPosts = ({ post }) => {
                 {" "}
                 {/* Set span to 1 for the first column */}
                 <Avatar size="6" src={post.picture_url} fallback="A"></Avatar>
-                <Text size="5" weight="bold">
+                <Text size="3" weight="bold">
                   {post.username}
                 </Text>
                 <img
