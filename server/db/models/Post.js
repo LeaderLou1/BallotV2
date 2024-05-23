@@ -15,14 +15,14 @@ class Post {
 
   static async findByUserId(user_id) {
     const query = `
-            SELECT * FROM posts WHERE user_id = ?
-        `;
+        SELECT posts.*, users.username,users.picture_url FROM posts JOIN users ON posts.user_id = users.id WHERE user_id = ?
+    `;
     const result = await knex.raw(query, [user_id]);
     return result.rows;
   }
 
   static async getAllPosts() {
-    const query = ` SELECT * FROM posts JOIN users ON posts.user_id = users.id`;
+    const query = `SELECT posts.*, users.username,users.picture_url FROM posts JOIN users ON posts.user_id = users.id`;
     const result = await knex.raw(query, []);
     return result.rows;
   }
