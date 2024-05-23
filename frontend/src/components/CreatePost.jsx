@@ -25,16 +25,16 @@ const CreatePost = () => {
 
   return (
     <>
-     
+
 
       <Flex justify="center">
-        <Card style={{ width: "600px"}}>
-      
-        <Flex justify="center" style={{ marginBottom: "30px" }}>
-           <Text size="7" weight="bold">
-               Create A Post!
-           </Text>
-       </Flex>
+        <Card style={{ width: "600px" }}>
+
+          <Flex justify="center" style={{ marginBottom: "30px" }}>
+            <Text size="7" weight="bold">
+              Create A Post!
+            </Text>
+          </Flex>
 
           <form onSubmit={handleSubmit}>
             <Flex justify="center">
