@@ -7,8 +7,10 @@ import './index.css';
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
 import UserBioProvider from './contexts/UserBioProvider.jsx';
+import FollowerProvider from './contexts/FollowerProvider.jsx';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
+  <FollowerProvider>
   <UserContextProvider>
     <HomePageProvider>
     <UserBioProvider>
@@ -19,5 +21,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
       </BrowserRouter>
      </UserBioProvider>
     </HomePageProvider>
-  </UserContextProvider>,
+  </UserContextProvider>
+  </FollowerProvider>,
 );

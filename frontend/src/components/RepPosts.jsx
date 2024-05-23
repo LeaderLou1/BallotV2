@@ -6,16 +6,18 @@ import notHearted from '../Photo/notHearted.png'
 import CommentComp from './CommentComp'
 import {useState} from 'react'
 import PostModal from './PostModal'
+import { Link } from 'react-router-dom';
 
 const RepPosts = ({ post }) => {
     const [isModalOpen, setIsModalOpen] = useState(false);
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
 
+    console.log(post);
     return(
-    <div>
+   <Link to={`/users/${post.user_id}`} style={{textDecoration: "none"}}><div>
       {isModalOpen && <PostModal closeModal={closeModal}/>}
-     <Flex justify="center" onClick={openModal} style={{ cursor: 'pointer', marginBottom: "2rem" }}>
+     <Flex justify="center" style={{ cursor: 'pointer', marginBottom: "2rem" }}>
          <Card style={{width:"800px"}}>
         <Box style={{ background: 'var(--gray-a2)', borderRadius: 'var(--radius-3)'}}>
         <Container size="2" style={{ background: 'white' }}>
@@ -72,7 +74,7 @@ const RepPosts = ({ post }) => {
       </Card>
     </Flex>
 
-    </div>
+    </div></Link> 
     )
 }
 

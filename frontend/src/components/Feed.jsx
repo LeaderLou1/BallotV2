@@ -15,12 +15,12 @@ const Feed = () => {
     fetchFeed();
   }, []);
 
-  console.log(feed);
+
 
   return (
     <div>
       <ScrollArea type="always" scrollbars="vertical" style={{ height:"100dvh" }}>
-      {feed.map((post) => (
+      {feed?.map((post) => (
         <Posts post={post} />
       ))}
       </ScrollArea>

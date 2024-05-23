@@ -14,12 +14,12 @@ const PostCards = ({username, heading, text}) =>{
         <div>
              {isModalOpen && <PostModal closeModal={closeModal}/>}
             <Box maxWidth="350px" onClick={openModal}>
-                <Card asChild style={{width: "250px", minheight: "100px"}}>
+                <Card asChild style={{width: "250px", height: "150px"}}>
                 <a href="#">
                   <Text as="div" size="4" weight="bold">
                          {heading}
                   </Text>
-                  <Text as="div" color="gray" size="4">
+                  <Text as="div" color="gray" size="2">
                          {text}
                   </Text>
               </a>

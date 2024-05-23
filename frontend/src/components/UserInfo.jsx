@@ -7,48 +7,32 @@ import { getPostByUserId } from "../adapters/post-adapter";
 import Modal from './Modal'; 
 import UserBioContext from "../contexts/UserBioContext";
 
-const UserInfo = () => {
-    const { currentUser } = useContext(CurrentUserContext);
+const UserInfo = ({userProfile, posts}) => {
+    const {currentUser} = useContext(CurrentUserContext)
     const { isBioSubmitted, bio } = useContext(UserBioContext)
-    const [post, setPost] = useState([]);
+ 
     const [errorText, setErrorText] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => setIsModalOpen(true);
     const closeModal = () => setIsModalOpen(false);
-
-   
-    useEffect(() => {
-        const fetchPosts = async () => {
-            const [userPost, error] = await getPostByUserId(currentUser?.id);
-            if (error) return setErrorText(error.message);
-            setPost(userPost);
-        };
-        fetchPosts();
-    }, [currentUser]);
-
-    useEffect(() => {
-        console.log('posts:', post.length);
-    }, [post]);
-
   
+    console.log(userProfile)
 
-
-    console.log(currentUser)
     return (
         <>
             <Flex>
                 <img
-                    src={profileIcon}
+                    src={userProfile.picture_url || profileIcon}
                     alt="Profile"
-                    style={{ width: '150px', height: '150px', marginLeft: '8px' }}
+                    style={{ width: '150px', height: '150px', marginLeft: '8px', borderRadius: "100%"}}
                 />
                 <Box style={{ padding: '10px', margin: '10px' }}>
                     <Flex style={{ margin: '2px' }}>
                         <Text size='8' style={{ marginLeft: '8px', fontWeight: 'bold' }}>
-                            {currentUser?.username}
+                            {userProfile?.username}
                         </Text>
-                        {currentUser?.is_rep ?
+                        {userProfile?.is_rep ?
                            <><img 
                            src={verified} 
                            alt="" 
@@ -62,18 +46,20 @@ const UserInfo = () => {
 
                     <Flex style={{ margin: '2px' }}>
                         <Text size="6" style={{ marginLeft: '8px' }}>
-                            {post.length} Posts
+                            {posts?.length} Posts
                         </Text>
                     </Flex>
 
                     <Flex style={{ margin: '2px' }}>
                         <Text size='8' style={{ marginLeft: '8px', marginRight: '8px' }}>
-                            {currentUser?.first_name}
+                            {userProfile?.first_name}
                         </Text>
-                        <Text size='8'>{currentUser?.last_name}</Text>
+                        <Text size='8'>{userProfile?.last_name}</Text>
                     </Flex>
 
-                    <Flex style={{ margin: '6px' }}>
+                    {
+                   currentUser.id === userProfile.id &&  
+                   <Flex style={{ margin: '6px' }}>
               
                         {!isBioSubmitted ? (
                              <div>
@@ -82,8 +68,9 @@ const UserInfo = () => {
                             </div>
                         ) : (
                             <Text size='4'style={{margin: '6px'}}>{bio}</Text>
-                        )}
+                        )} 
                     </Flex>
+                        }
                 </Box>
             </Flex>
         </>

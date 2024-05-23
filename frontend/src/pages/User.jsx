@@ -32,7 +32,7 @@ export default function UserPage() {
 
 useEffect(() => {
   const fetchPosts = async () => {
-      const [userPost, error] = await getPostByUserId(currentUser?.id);
+      const [userPost, error] = await getPostByUserId(id);
       // if (error) return setErrorText(error.message);
       setPost(userPost);
   };
@@ -59,7 +59,7 @@ useEffect(() => {
         <Box style={{ marginTop: '40px' }}>
         <Box minHeight='100vh' width='1140px' style={{ background: 'white' }}>
         <Flex justify="start" style={{ marginLeft: "150px" }}>
-        <UserInfo />
+        <UserInfo  userProfile={userProfile} posts={posts} />
       </Flex>
 
       <Box style={{ paddingLeft: "90px", paddingRight: "90px" }}>
@@ -72,8 +72,10 @@ useEffect(() => {
 
       <Flex justify="center">
         <Grid columns="3" gap="3" rows="repeat(2, 64px)" width="auto">
+      
           {posts?.map((post) => (
-            <PostCards key={post?.id} username={currentUser?.username} text={post?.content} />
+          
+            <PostCards key={post?.id} username={currentUser?.username} heading={post?.heading} text={post?.content} />
           ))}
         </Grid>
       </Flex>

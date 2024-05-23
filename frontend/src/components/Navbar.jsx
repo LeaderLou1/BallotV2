@@ -36,7 +36,7 @@ const NavBar = () => {
            
 
             <Flex direction="column" align="center" gap="1rem" style={{ marginTop: '2rem' }}>
-                <NavLink to='/home'>
+                <NavLink to='/home' style={{textDecoration: "none"}}>
                     <Button
                         size={{ initial: '2', md: '4' }}
                         variant='ghost'
@@ -52,7 +52,7 @@ const NavBar = () => {
                 </NavLink>
                 <Separator color="black" orientation="horizontal" size="2" />
 
-                <NavLink to={currentUser ? `/users/${currentUser.id}` : '/'}>
+                <NavLink to={currentUser ? `/users/${currentUser.id}` : '/'} style={{textDecoration: "none"}}>
                     <Button
                         size={{ initial: '2', md: '4' }}
                         variant='ghost'
@@ -68,7 +68,7 @@ const NavBar = () => {
                 </NavLink>
                 <Separator color="black" orientation="horizontal" size="2" />
 
-                <NavLink to='/about'>
+                <NavLink to='/about' style={{textDecoration: "none"}}>
                     <Button
                         size={{ initial: '2', md: '4' }}
                         variant='ghost'
