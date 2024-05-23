@@ -24,6 +24,6 @@ export const unfollowUser = async ({ follower_user_id, followed_user_id }) =>
 export const getFollowers = async (followed_user_id) =>
     fetchHandler(`${baseUrl}/${followed_user_id}/followers`);
 
-// Get followed users
+// Get followed users (people that the user is following)
 export const getFollowedUsers = async (follower_user_id) =>
     fetchHandler(`${baseUrl}/${follower_user_id}/followed`);

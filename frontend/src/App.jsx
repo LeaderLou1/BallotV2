@@ -27,7 +27,7 @@ export default function App() {
         <Route path='/sign-up' element={<SignUpPage />} />
         <Route path='/choose' element={<ChoicePage />} />
         <Route path='/users' element={<UsersPage />} />
-        <Route path='/about' element={<AboutPage/>} />
+        <Route path='/about' element={<AboutPage />} />
         <Route path='/test' element={<TestPage />} />
         <Route path='/users/:id' element={<UserPage />} />
         <Route path='*' element={<NotFoundPage />} />
