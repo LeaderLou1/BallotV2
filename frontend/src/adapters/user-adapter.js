@@ -35,3 +35,35 @@ export const getUser = async (id) => fetchHandler(`${baseUrl}/${id}`);
 
 export const updateUsername = async ({ id, username }) =>
   fetchHandler(`${baseUrl}/${id}`, getPatchOptions({ id, username }));
+
+// New function to update the bio of a user
+export const updateUserBio = async (id, bio) =>
+  fetchHandler(`${baseUrl}/${id}/bio`, getPatchOptions({ bio }));
+
+// New function to update all user details
+export const updateUserDetails = async ({
+  id,
+  username,
+  is_rep,
+  first_name,
+  last_name,
+  picture_url,
+  zipcode,
+  state,
+  bio,
+  location
+}) =>
+  fetchHandler(
+    `${baseUrl}/${id}`,
+    getPatchOptions({
+      username,
+      is_rep,
+      first_name,
+      last_name,
+      picture_url,
+      zipcode,
+      state,
+      bio,
+      location
+    })
+  );

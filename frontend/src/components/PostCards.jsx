@@ -2,9 +2,12 @@ import {Box, Card, Text} from '@radix-ui/themes';
 import { useState } from 'react';
 import PostModal from './PostModal';
 
-const PostCards = ({username, text}) =>{
+const PostCards = ({username, heading, text}) =>{
     const [isModalOpen, setIsModalOpen] = useState(false);
-    const openModal = () => setIsModalOpen(true);
+    const openModal = (e) => {
+        setIsModalOpen(true);
+        console.log()
+    }
     const closeModal = () => setIsModalOpen(false);
 
     return(
@@ -14,7 +17,7 @@ const PostCards = ({username, text}) =>{
                 <Card asChild style={{width: "250px", minheight: "100px"}}>
                 <a href="#">
                   <Text as="div" size="4" weight="bold">
-                         Quick start
+                         {heading}
                   </Text>
                   <Text as="div" color="gray" size="4">
                          {text}

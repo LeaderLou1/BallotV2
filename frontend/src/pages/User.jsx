@@ -67,7 +67,7 @@ useEffect(() => {
       </Box>
        
       <Flex justify="center" style={{ margin: '20px' }}>
-        <Text size="9">Posts</Text>
+        <Text size="8">Posts</Text>
       </Flex>
 
       <Flex justify="center">

@@ -34,7 +34,7 @@ const ProfilePage = () =>{
       </Box>
        
       <Flex justify="center" style={{ margin: '20px' }}>
-        <Text size="9">Posts</Text>
+        <Text size="3" style={{fontSize:"100rem"}}></Text>
       </Flex>
 
       <Flex justify="center">

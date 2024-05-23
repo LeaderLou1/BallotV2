@@ -111,20 +111,19 @@ class User {
     // dynamic queries are easier if you add more properties
     const query = `
       UPDATE users
-      SET username=?
-      SET first_name=?
-      SET last_name=?
-      SET picture_url=?
-      SET zipcode=?
-      SET state=?
-      SET location=?
-      SET bio=?
-      WHERE id=?
+      SET username = ?,
+          first_name = ?,
+          last_name = ?,
+          picture_url = ?,
+          zipcode = ?,
+          state = ?,
+          location = ?,
+          bio = ?
+      WHERE id = ?
       RETURNING *
     `;
     const { rows } = await knex.raw(query, [
       username,
-      id,
       first_name,
       last_name,
       picture_url,
@@ -132,7 +131,20 @@ class User {
       state,
       location,
       bio,
+      id
     ]);
+    const updatedUser = rows[0];
+    return updatedUser ? new User(updatedUser) : null;
+  }
+
+  static async updateBio(id, bio) {
+    const query = `
+      UPDATE users
+      SET bio = ?
+      WHERE id = ?
+      RETURNING *
+    `;
+    const { rows } = await knex.raw(query, [bio, id]);
     const updatedUser = rows[0];
     return updatedUser ? new User(updatedUser) : null;
   }

@@ -23,6 +23,7 @@ const postsControllers = {
       res.status(500).json({ error: "Internal Server Error" });
     }
   },
+
   getAllPosts: async (req, res) => {
     try {
       const posts = await Post.getAllPosts();
@@ -34,7 +35,7 @@ const postsControllers = {
   },
 
   delete: async (req, res) => {
-    const { user_id, post_id } = req.params;
+    const { post_id } = req.params;
     try {
       await Post.delete(post_id);
       res.sendStatus(204);
@@ -44,11 +45,12 @@ const postsControllers = {
     }
   },
 
-  deleteAllPostsForUser: async (req, res) => {
-    const { user_id } = req.params;
+  update: async (req, res) => {
+    const { post_id } = req.params;
+    const { heading, content } = req.body;
     try {
-      await Post.deleteAllPostsForUser(user_id);
-      res.sendStatus(204);
+      const updatedPost = await Post.update(post_id, heading, content);
+      res.json(updatedPost);
     } catch (error) {
       console.error(error);
       res.status(500).json({ error: "Internal Server Error" });

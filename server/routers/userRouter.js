@@ -8,16 +8,15 @@ const userRouter = express.Router();
 
 // user related endpoints
 userRouter.post("/", /*checkAuthentication,*/ userControllers.createUser); // Register
-userRouter.patch("/:id", /*checkAuthentication,*/ userControllers.updateUser); // Update user information
+
+// Update user information
+userRouter.patch("/:id", checkAuthentication, userControllers.updateUser);
+
+// Update user bio
+userRouter.patch("/:id/bio", checkAuthentication, userControllers.updateUserBio); // New route for updating bio
+
 userRouter.get("/", /*checkAuthentication,*/ userControllers.listUsers); // Show all users
 userRouter.get("/:id", /*checkAuthentication,*/ userControllers.showUser); // Show one user
-// userRouter.patch(
-//   "/:id/representative",
-//   checkAuthentication,
-//   userControllers.updateToRepresentative
-// ); // Update user to representative
-
-// userRouter.delete("/:id", checkAuthentication, userControllers.deleteUser);
 
 // user post related endpoints
 userRouter.post(
@@ -28,12 +27,21 @@ userRouter.post(
 );
 // Create a post
 
-// GET /api/users/1/posts- get posts made by user 1.
+// GET /api/users/:user_id/posts - get posts made by user
 userRouter.get(
   "/:user_id/posts",
   /*checkAuthentication,*/ postControllers.findByUserId
 );
-// Get posts by a representative
+// Get posts by a user
+
+// PATCH /api/users/:user_id/posts/:post_id - update a post
+userRouter.patch(
+  "/:user_id/posts/:post_id",
+  /*checkAuthentication,*/
+  postAuthorization,
+  postControllers.update
+);
+// Update a post
 
 userRouter.delete(
   "/:user_id/posts/:post_id",
@@ -52,22 +60,21 @@ userRouter.post(
 ); // Follow a representative
 
 userRouter.get(
-  "/:follower_user_id/followers",
+  "/:followed_user_id/followers",
   checkAuthentication,
   followerControllers.getFollowers
-); // Get followers people who follow you
+); // Get followers (people who follow you)
 
 userRouter.get(
-  "/:followed_user_id/followed",
+  "/:follower_user_id/followed",
   checkAuthentication,
   followerControllers.getFollowed
-); // Get followed people who you follow
+); // Get followed people (people you follow)
 
-//Get all posts
-
+// Unfollow a user
 userRouter.delete(
-  "/:followed_user_id/unfollowUser",
+  "/:follower_user_id/unfollowUser",
   followerControllers.unfollowUser
-); // Unfollow a representative
+);
 
 module.exports = userRouter;
