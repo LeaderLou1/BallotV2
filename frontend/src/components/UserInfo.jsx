@@ -58,16 +58,16 @@ const UserInfo = ({userProfile, posts}) => {
                     </Flex>
 
                     {
-                   currentUser.id === userProfile.id &&  
+                   currentUser?.id === userProfile?.id &&  
                    <Flex style={{ margin: '6px' }}>
               
-                        {!isBioSubmitted ? (
+                        {!isBioSubmitted && !currentUser?.bio ? (
                              <div>
                              <Button  variant="outline" onClick={openModal}>Create bio</Button>
-                             {isModalOpen && <Modal closeModal={closeModal} />}
+                             {isModalOpen && <Modal userId={currentUser?.id} closeModal={closeModal} />}
                             </div>
                         ) : (
-                            <Text size='4'style={{margin: '6px'}}>{bio}</Text>
+                            <Text size='4'style={{margin: '6px'}}>{currentUser?.bio || bio}</Text>
                         )} 
                     </Flex>
                         }

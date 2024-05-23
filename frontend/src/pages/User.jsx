@@ -75,7 +75,7 @@ useEffect(() => {
       
           {posts?.map((post) => (
           
-            <PostCards key={post?.id} username={currentUser?.username} heading={post?.heading} text={post?.content} />
+            <PostCards key={post?.id} currentUser={currentUser} post={post}/>
           ))}
         </Grid>
       </Flex>

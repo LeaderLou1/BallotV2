@@ -2,11 +2,13 @@ import { Flex, Box, TextArea, Button, Text } from "@radix-ui/themes"
 import { useContext } from "react";
 import { useState } from 'react'
 import UserBioContext from "../contexts/UserBioContext";
+import { updateUserBio } from "../adapters/user-adapter";
 
-const Modal = ({ closeModal }) => {
+const Modal = ({ userId, closeModal }) => {
    const { isBioSubmitted, setIsBioSubmitted, bio, setBio } = useContext(UserBioContext)
       const handleBioChange = (e) => {
         setBio(e.target.value);
+        updateUserBio(userId, e.target.value)
     };
 
     const handleClick = () => {

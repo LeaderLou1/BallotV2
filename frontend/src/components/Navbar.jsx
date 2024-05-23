@@ -45,9 +45,9 @@ const NavBar = () => {
                         <img
                             src={homeIcon}
                             alt="Home"
-                            style={{ width: '20px', height: '20px' }}
+                            style={{ width: '25px', height: '25px' }}
                         />
-                        Home
+                        <Text size="5">Home</Text>
                     </Button>
                 </NavLink>
                 <Separator color="black" orientation="horizontal" size="2" />
@@ -59,11 +59,11 @@ const NavBar = () => {
                         style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', width: '100%' }}
                     >
                         <img
-                            src={profileIcon}
+                            src={currentUser?.picture_url || profileIcon}
                             alt="Profile"
-                            style={{ width: '20px', height: '20px' }}
+                            style={{ width: '25px', height: '25px', borderRadius: '100%' }}
                         />
-                        Profile
+                       <Text size="5">Profile</Text>
                     </Button>
                 </NavLink>
                 <Separator color="black" orientation="horizontal" size="2" />
@@ -77,15 +77,15 @@ const NavBar = () => {
                         <img
                             src={aboutIcon}
                             alt="About"
-                            style={{ width: '20px', height: '20px' }}
+                            style={{ width: '25px', height: '25px' }}
                         />
-                        About
+                       <Text size="5">About</Text>
                     </Button>
                 </NavLink>
-                <Separator color="black" orientation="horizontal" size="2" />
+               
             </Flex>
 
-            <Flex justify='center' style={{ marginTop: 'auto' }}>
+            <Flex justify='center' style={{ marginTop: '50px' }}>
                 <Button 
                     color="gray" 
                     variant="solid" 

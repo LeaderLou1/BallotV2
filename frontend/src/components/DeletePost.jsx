@@ -6,7 +6,7 @@ import CurrentUserContext from "../contexts/current-user-context";
 
 const DeletePost = ({ post, onDelete }) => {
     const { currentUser } = useContext(CurrentUserContext);
-    const user_id = currentUser.id;
+    const user_id = currentUser?.id;
 
     const handleDelete = async () => {
         try {
