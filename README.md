@@ -3,7 +3,7 @@
 
 **Developed by Dream Team USA**:
 👨‍💻 [Louis Jager](https://github.com/LouisJager) (Backend/Scrum Master)
-🎨 [Elijah Hawes](https://github.com/ElijahHawes) (Frontend Lead)
+🎨 [Elijah Hawes](https://github.com/passwordd009) (Frontend Lead)
 🛠️ [Xhenis Malecaj](https://github.com/XhenisM) (Feature Developer)
 
 ---
