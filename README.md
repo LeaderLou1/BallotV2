@@ -4,7 +4,7 @@
 **Developed by Dream Team USA**:
 👨‍💻 [Louis Jager](https://github.com/LouisJager) (Backend/Scrum Master)
 🎨 [Elijah Hawes](https://github.com/passwordd009) (Frontend Lead)
-🛠️ [Xhenis Malecaj](https://github.com/XhenisM) (Feature Developer)
+🛠️ [Xhenis Malecaj](https://github.com/xhenis01) (Feature Developer)
 
 ---
 
@@ -89,9 +89,9 @@ Ballot tackles **political polarization** by:
 ## 👏 **Credits**
 | Member | GitHub | Contribution Highlight |
 |-------------------|--------|------------------------|
-| Louis Jager | [@LouisJager](https://github.com/LouisJager) | Database design, API architecture |
-| Elijah Hawes | [@ElijahHawes](https://github.com/ElijahHawes) | Interactive React frontend |
-| Xhenis Malecaj | [@XhenisM](https://github.com/XhenisM) | Post feature implementation |
+| Louis Jager | [@LouisJager](https://github.com/LeaderLou1) | Database design, API architecture |
+| Elijah Hawes | [@ElijahHawes](https://github.com/passwordd009) | Interactive React frontend |
+| Xhenis Malecaj | [@XhenisM](https://github.com/xhenis01) | Post feature implementation |
 
 ---
 
