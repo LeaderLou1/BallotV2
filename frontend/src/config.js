@@ -1,7 +1,7 @@
 const config = {
   apiUrl:
     process.env.NODE_ENV === "production"
-      ? "https://your-backend-domain.com" // Replace with your actual backend domain
+      ? "https://ballot-usa-backend.onrender.com" // This will be your Render URL
       : "http://localhost:3000",
 };
 

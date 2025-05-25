@@ -1,0 +1,36 @@
+services:
+  - type: web
+    name: ballot-usa-backend
+    env: node
+    buildCommand: cd server && npm install && npm run build
+    startCommand: cd server && npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: SESSION_SECRET
+        generateValue: true
+      - key: PG_HOST
+        fromDatabase:
+          name: ballot-db
+          property: host
+      - key: PG_PORT
+        fromDatabase:
+          name: ballot-db
+          property: port
+      - key: PG_USER
+        fromDatabase:
+          name: ballot-db
+          property: user
+      - key: PG_PASS
+        fromDatabase:
+          name: ballot-db
+          property: password
+      - key: PG_DB
+        fromDatabase:
+          name: ballot-db
+          property: database
+
+databases:
+  - name: ballot-db
+    databaseName: ballot
+    plan: free
