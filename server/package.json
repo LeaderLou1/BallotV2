@@ -1,12 +1,12 @@
 {
-  "name": "react-express-auth-template",
+  "name": "ballot-usa",
   "version": "1.0.0",
-  "description": "",
+  "description": "Ballot USA - A civic engagement platform",
   "main": "index.js",
   "scripts": {
     "build": "npm install",
-    "start": "node ./index.js",
-    "dev": "nodemon ./index.js",
+    "start": "node index.js",
+    "dev": "nodemon index.js",
     "connect": "psql -U postgres -d react_auth_example",
     "migrate": "knex migrate:latest",
     "migrate:make": "knex migrate:make",
