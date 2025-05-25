@@ -3,14 +3,11 @@ services:
     name: ballot-usa-backend
     env: node
     plan: free
-    buildCommand: |
-      mkdir -p /opt/render/project/build
-      cp -r server/* /opt/render/project/build/
-      cd /opt/render/project/build
-      npm install
-    startCommand: |
-      cd /opt/render/project/build
-      node index.js
+    repo: https://github.com/LeaderLou1/BallotV2.git
+    branch: main
+    sourcePath: server
+    buildCommand: npm install
+    startCommand: node index.js
     envVars:
       - key: NODE_ENV
         value: production
