@@ -2,8 +2,8 @@
 **A neutral space connecting constituents and representatives to reduce political polarization**
 
 **Developed by Dream Team USA**:
-- Xhenis Malecaj
 - Louis Jager
+- Xhenis Malecaj
 - Elijah Hawes
 
 ---
