@@ -1,101 +1,65 @@
-# Ballot: Civic Engagement Platform
-*A neutral space connecting constituents and representatives to reduce political polarization*
+# 🏛️ Ballot: Civic Engagement Platform
+**A neutral space connecting constituents and representatives to reduce political polarization**
 
 **Developed by Dream Team USA**:
-👨‍💻 [Louis Jager](https://github.com/LouisJager) (Backend/Scrum Master)
-🎨 [Elijah Hawes](https://github.com/passwordd009) (Frontend Lead)
-🛠️ [Xhenis Malecaj](https://github.com/xhenis01) (Feature Developer)
+- Xhenis Malecaj
+- Louis Jager
+- Elijah Hawes
 
 ---
 
-## 🚀 Key Features
-### **For Representatives**
-- Create/manage posts *(Xhenis)*
-- View followers and follow other reps *(Louis)*
-- Delete posts *(Xhenis)*
+## 😞 The Problem & Mission
+### The Problem
+The United States faces significant challenges from intense political polarization. This is fueled by a two-party system representing extreme ideologies, which leads to legislative inefficiency, discourages political engagement, and erodes trust. This division is significantly exacerbated by for-profit social media, which creates echo chambers and promotes divisive, inflammatory rhetoric.
 
-### **For Constituents**
-- Create profiles *(Team)*
-- Follow/unfollow representatives *(Louis)*
-- View representative posts *(Elijah)*
+### 🤔 Our Hypothesis
+If citizens had an alternative to for-profit social media websites like Facebook and X to engage with politicians, then they would encounter less inflammatory and divisive political information, encouraging more rational decision-making and less political and ideological division.
+
+### 🏙️ Mission Statement
+Our mission is to **connect citizens and representatives through problems and solutions.**
+
+### 🫂 Who do we serve?
+US citizens who are of age and seek to be informed on local politics, create change in their community, and have meaningful discourse.
 
 ---
 
-## 🛠️ **Team Contributions**
+## 🚀 Key Features & Product Overview
+
+Our platform offers a robust suite of features tailored to both Representatives and Constituents, fostering meaningful engagement and collaboration.
+
+### For Representatives
+| Feature | Description | Technical Owner |
+| :--- | :--- | :--- |
+| **Post Management** | Create, share updates, address concerns, and manage content by deleting posts. | Xhenis Malecaj |
+| **Follower Engagement**| View followers and follow other Representatives for cross-collaboration. | Louis Jager |
+
+### For Constituents
+| Feature | Description | Technical Owner |
+| :--- | :--- | :--- |
+| **Profile Creation** | Create profiles to voice opinions and participate in community initiatives. | Team |
+| **Following Representatives** | Follow/unfollow representatives to stay informed and control the content feed. | Louis Jager |
+| **View Feed** | Easily access posts from followed Representatives. | Elijah Hawes |
+
+---
+
+## 💻 Technical Documentation & Team Contributions
+
+### 🛠️ Tech Stack
+| Area | Technologies | Owners |
+| :--- | :--- | :--- |
+| **Backend** | Node.js, Express, **PostgreSQL** (Database) | Louis Jager, Xhenis Malecaj |
+| **Frontend**| React, Radix UI, CSS | Elijah Hawes |
+
+### 👥 Team Contributions
 | Member | Role | Key Work |
-|-------------------|-----------------------|----------|
-| **Louis Jager** | Backend/Scrum Master | - Designed `users`/`follows` database schema <br> - Built follow/unfollow API endpoints <br> - Led agile workflows |
-| **Elijah Hawes** | Frontend Lead | - Implemented React UI (profiles, feeds) <br> - Integrated Radix UI components <br> - Connected frontend to Louis’s APIs |
-| **Xhenis Malecaj**| Feature Developer | - Created post creation/deletion system <br> - Collaborated on database models |
+| :--- | :--- | :--- |
+| **Louis Jager** | Backend/Scrum Master | Designed `users`/`follows` database schema, built follow/unfollow API endpoints, led agile workflows. |
+| **Elijah Hawes** | Frontend Lead | Implemented React UI (profiles, feeds), integrated Radix UI, connected frontend to APIs. |
+| **Xhenis Malecaj**| Feature Developer | Created post creation/deletion system, collaborated on database models. |
 
----
-
-## 📂 **Repository Structure**
+### 📂 Repository Structure
 ```bash
 ballot_usa/
-├── backend/ # Louis & Xhenis
-│ ├── migrations/ # Schema versions (Louis)
-│ ├── models/ # Post & User logic (Xhenis/Louis)
-│ └── controllers/ # API handlers (Louis: follows, Xhenis: posts)
-├── frontend/ # Elijah
-│ ├── src/components/ # React UI (profiles, feeds)
-│ └── src/api/ # Frontend-Backend integration
-└── docs/ # ERD, proposals (Team)
-```
-
----
-
-## 🔗 **Technical Documentation**
-- **[ERD Diagram](https://dbdiagram.io/d/663256d65b24a634d0425b3c)** *(Team)*
-- **[API Docs](docs/api_endpoints.md)** *(Louis/Xhenis)*
-- **[Project Proposal](docs/proposal.pdf)** *(Team)*
-
----
-
-## 💻 **Tech Stack**
-| Area | Technologies | Owners |
-|------------|--------------|--------|
-| **Backend** | Node.js, Express, PostgreSQL | Louis, Xhenis |
-| **Frontend**| React, Radix UI | Elijah |
-| **Design** | Figma, CSS | Elijah |
-
----
-
-## 🚀 **Getting Started**
-1. Clone the repo:
-```bash
-git clone https://github.com/DreamTeamUSA/ballot_usa.git
-```
-2. Set up the database (Louis’s schema):
-```bash
-npm run migrate
-```
-3. Start the backend (Xhenis/Louis) & frontend (Elijah):
-```bash
-npm run dev
-cd frontend && npm start
-```
-
----
-
-## 🌟 **Why This Project?**
-Ballot tackles **political polarization** by:
-- Replacing toxic social media with **structured discourse** *(Team)*
-- Enabling **transparent rep-constituent communication** *(Louis’s follow system, Xhenis’s posts)*
-- Promoting **informed voting** via clean UI *(Elijah)*
-
----
-
-## 👏 **Credits**
-| Member | GitHub | Contribution Highlight |
-|-------------------|--------|------------------------|
-| Louis Jager | [@LouisJager](https://github.com/LeaderLou1) | Database design, API architecture |
-| Elijah Hawes | [@ElijahHawes](https://github.com/passwordd009) | Interactive React frontend |
-| Xhenis Malecaj | [@XhenisM](https://github.com/xhenis01) | Post feature implementation |
-
----
-
-*Built with civic passion and technical collaboration.* 🏛️💻
-
----
-
+├── backend/ # API logic and database migrations (Louis & Xhenis)
+├── frontend/ # React UI components and integration (Elijah)
+└── docs/ # ERD, proposals, API endpoints (Team)
